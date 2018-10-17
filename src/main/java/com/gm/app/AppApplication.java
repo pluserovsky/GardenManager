@@ -11,7 +11,7 @@ public class AppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AppApplication.class, args);
 	}
-
+/*
 	@Bean
 	ApplicationRunner init(PlantRepository plantRepository) {
 		return args -> {
@@ -22,5 +22,5 @@ public class AppApplication {
 			});
 			//garden.findAll().forEach(System.out::println);
 		};
-	}
+	}*/
 }
