@@ -3,9 +3,12 @@
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let plant of plants">
-        <img mat-list-avatar src="{{plant.giphyUrl}}" alt="{{plant.name}}">
-        <h3 mat-line>{{plant.name}}</h3>
+        <!--<img mat-list-avatar src="{{plant.giphyUrl}}" alt="{{plant.name}}"> -->
+        <h3 mat-line>
+          <a mat-button [routerLink]="['/plant-edit', plant.id]">{{plant.name}}</a>
+        </h3>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
+  <button mat-fab color="primary" [routerLink]="['/plant-add']">Add</button>
 </mat-card>

@@ -20,7 +20,7 @@ public class AppApplication {
 				plant.setName(name);
 				garden.save(plant);
 			});
-			garden.findAll().forEach(System.out::println);
+			//garden.findAll().forEach(System.out::println);
 		};
 	}
 }

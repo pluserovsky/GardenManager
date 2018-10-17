@@ -18,7 +18,7 @@ public class PlantController {
     @CrossOrigin(origins = "http://localhost:4200")
     public Collection<Plant> coolPlants() {
         return repository.findAll().stream()
-                .filter(this::isIn)
+               // .filter(this::isIn)
                 .collect(Collectors.toList());
     }
 
