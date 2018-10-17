@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 @RestController
 public class PlantController {
-    private Garden repository;
+    private PlantRepository repository;
 
-    public PlantController(Garden repository) {
+    public PlantController(PlantRepository repository) {
         this.repository = repository;
     }
 

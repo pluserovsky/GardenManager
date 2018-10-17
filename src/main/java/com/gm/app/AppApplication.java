@@ -13,12 +13,12 @@ public class AppApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(Garden garden) {
+	ApplicationRunner init(PlantRepository plantRepository) {
 		return args -> {
 			Stream.of("Tuja", "Modrzew", "Roza", "Tulipan", "Brzoza").forEach(name -> {
 				Plant plant = new Plant();
 				plant.setName(name);
-				garden.save(plant);
+				plantRepository.save(plant);
 			});
 			//garden.findAll().forEach(System.out::println);
 		};

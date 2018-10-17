@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
-
+import javax.persistence.GenerationType;
 import javax.persistence.Entity;
 
 @Entity
@@ -12,8 +12,9 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @ToString @EqualsAndHashCode
 @Data
-public class Plant {
+public class User {
     @Id @GeneratedValue
     private Long id;
     private @NonNull String name;
+    private String email;
 }
