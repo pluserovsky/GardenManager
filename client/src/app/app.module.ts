@@ -1,65 +1,62 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { PlantService } from './shared/plant/plant.service';
-import { GardenService } from './shared/garden/garden.service';
-import { HttpClientModule } from '@angular/common/http';
-
-import { AppComponent } from './app.component';
-import { PlantListComponent } from './plant-list/plant-list.component';
-
-import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PlantEditComponent } from './plant-edit/plant-edit.component';
-
-import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
-import { GardenListComponent } from './garden-list/garden-list.component';
-import { GardenEditComponent } from './garden-edit/garden-edit.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+import {RouterModule, Routes} from '@angular/router';
+import {AppComponent} from './app.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {PlantService} from './shared/plant/plant.service';
+import {GardenService} from './shared/garden/garden.service';
+
+import {PlantEditComponent} from './plant-edit/plant-edit.component';
+import {PlantListComponent} from './plant-list/plant-list.component';
+import {GardenListComponent} from './garden-list/garden-list.component';
+import {GardenEditComponent} from './garden-edit/garden-edit.component';
+import {HomeComponent} from './home/home.component';
+import {AboutComponent} from './about/about.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/garden-list', pathMatch: 'full' },
-  {
-    path: 'garden-list',
-    component: GardenListComponent
-  },
-  {
-    path: 'garden-add',
-    component: GardenEditComponent
-  },
-  {
-    path: 'garden-edit/:id',
-    component: GardenEditComponent
-  }
+  {path: 'home', component: HomeComponent},
+  {path: 'about', component: AboutComponent},
+  {path: 'garden-list', component: GardenListComponent},
+  {path: 'plant-list', component: PlantListComponent},
+  {path: 'garden-add', component: GardenEditComponent},
+  {path: 'garden-edit/:id', component: GardenEditComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
 ];
 
 /**const appRoutes: Routes = [
-  { path: '', redirectTo: '/plant-list', pathMatch: 'full' },
-  {
+ { path: '', redirectTo: '/plant-list', pathMatch: 'full' },
+ {
     path: 'plant-list',
     component: PlantListComponent
   },
-  {
+ {
     path: 'plant-add',
     component: PlantEditComponent
   },
-  {
+ {
     path: 'plant-edit/:id',
     component: PlantEditComponent
   }
-];
-**/
+ ];
+ **/
 @NgModule({
   declarations: [
     AppComponent,
     PlantListComponent,
     PlantEditComponent,
     GardenListComponent,
-    GardenEditComponent
+    GardenEditComponent,
+    HomeComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
-	  HttpClientModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
@@ -71,7 +68,8 @@ const appRoutes: Routes = [
     NgxPaginationModule
   ],
   providers:
-   /** [PlantService],**/  [GardenService],
+  /** [PlantService],**/  [GardenService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

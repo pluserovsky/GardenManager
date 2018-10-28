@@ -26,7 +26,7 @@ export class GardenEditComponent implements OnInit, OnDestroy {
         this.gardenService.get(id).subscribe((garden: any) => {
           if (garden) {
             this.garden = garden;
-            this.garden.href = garden._links.self.href;
+           // this.garden.href = garden._links.self.href;
             //this.giphyService.get(garden.name).subscribe(url => garden.giphyUrl = url);
           } else {
             console.log(`Garden with id '${id}' not found, returning to list`);

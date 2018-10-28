@@ -31,27 +31,38 @@ public class GardenController {
         return gardenRepository.findAll().stream()
                 .collect(Collectors.toList());
     }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/serve-gardens/{gardenId}")
+    public Garden getGardenById(@PathVariable Long gardenId) {
+        return gardenRepository.findById(gardenId).map(garden -> {
+            garden.getName();
+            return gardenRepository.save(garden);
+        }).orElseThrow(() -> new ResourceNotFoundException("GardenId " + gardenId + " not found"));
+    }
 
     @PostMapping("/add-garden")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Garden createGarden(@Valid @RequestBody Garden garden) {
         return gardenRepository.save(garden);
     }
 
-    @PutMapping("/serve-gardens/{gardenId}")
+    @PutMapping("/update-garden/{gardenId}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Garden updateGarden(@PathVariable Long gardenId, @Valid @RequestBody Garden gardenRequest) {
         return gardenRepository.findById(gardenId).map(garden -> {
             garden.setName(gardenRequest.getName());
             return gardenRepository.save(garden);
-        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + gardenId + " not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("GardenId " + gardenId + " not found"));
     }
 
 
-    @DeleteMapping("/serve-gardens/{gardenId}")
+    @DeleteMapping("/delete-garden/{gardenId}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<?> deleteGarden(@PathVariable Long gardenId) {
         return gardenRepository.findById(gardenId).map(garden -> {
             gardenRepository.delete(garden);
             return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + gardenId + " not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("GardenId " + gardenId + " not found"));
     }
 
 

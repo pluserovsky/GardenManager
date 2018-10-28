@@ -2,7 +2,9 @@
 <div style="text-align:center">
   <h1>
     <mat-toolbar color="primary">
-      <span>Menadżer roślin</span>
+      <button mat-flat-button color="primary" [routerLink]="['/home']">Menadżer ogrodu</button>
+      <button mat-flat-button color="primary" [routerLink]="['/about']">O programie</button>
+      <button mat-flat-button color="secondary" [routerLink]="['/garden-list']">Moje ogrody</button>
     </mat-toolbar>
   </h1>
   <router-outlet></router-outlet>
