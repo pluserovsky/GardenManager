@@ -9,7 +9,8 @@ import { GardenService } from '../shared/garden/garden.service';
 export class GardenListComponent implements OnInit {
   gardens: Array<any>;
 
-  constructor(private gardenService: GardenService) { }
+  constructor(private gardenService: GardenService) {
+  }
 
   ngOnInit() {
     this.gardenService.getAll().subscribe(data => {

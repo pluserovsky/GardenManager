@@ -8,10 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class GardenController {
     @Autowired
     private GardenRepository gardenRepository;
@@ -26,12 +28,9 @@ public class GardenController {
         return gardenRepository.findAll(pageable);
     }*/
     @GetMapping("/serve-gardens")
-    @CrossOrigin(origins = "http://localhost:4200")
     public Collection<Garden> getAllGardens() {
-        return gardenRepository.findAll().stream()
-                .collect(Collectors.toList());
+        return new ArrayList<>(gardenRepository.findAll());
     }
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/serve-gardens/{gardenId}")
     public Garden getGardenById(@PathVariable Long gardenId) {
         return gardenRepository.findById(gardenId).map(garden -> {
@@ -41,13 +40,11 @@ public class GardenController {
     }
 
     @PostMapping("/add-garden")
-    @CrossOrigin(origins = "http://localhost:4200")
     public Garden createGarden(@Valid @RequestBody Garden garden) {
         return gardenRepository.save(garden);
     }
 
     @PutMapping("/update-garden/{gardenId}")
-    @CrossOrigin(origins = "http://localhost:4200")
     public Garden updateGarden(@PathVariable Long gardenId, @Valid @RequestBody Garden gardenRequest) {
         return gardenRepository.findById(gardenId).map(garden -> {
             garden.setName(gardenRequest.getName());
@@ -57,7 +54,6 @@ public class GardenController {
 
 
     @DeleteMapping("/delete-garden/{gardenId}")
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<?> deleteGarden(@PathVariable Long gardenId) {
         return gardenRepository.findById(gardenId).map(garden -> {
             gardenRepository.delete(garden);
