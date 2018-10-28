@@ -7,8 +7,8 @@ export class PlantService {
   public API = '//localhost:8080';
   public PLANT_API = this.API + '/plants';
   constructor(private http: HttpClient) { }
-	getAll(): Observable<any> {
-    return this.http.get('//localhost:8080/serve-plants');
+	getAll(id: string): Observable<any> {
+    return this.http.get('//localhost:8080/gardens/' + id+ '/plants');
   }
   get(id: string) {
     return this.http.get(this.PLANT_API + '/' + id);

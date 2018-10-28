@@ -3,12 +3,17 @@
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let garden of gardens">
-        <!--<img mat-list-avatar src="{{plant.giphyUrl}}" alt="{{plant.name}}"> -->
-        <h3 mat-line>
+        <!--<img mat-list-avatar src="{{plant.giphyUrl}}" alt="{{plant.name}}">
+         <a mat-button [routerLink]="['/plant-list', garden.id]">{{garden.name}}</a>
           <a mat-button [routerLink]="['/garden-edit', garden.id]">{{garden.name}}</a>
+         -->
+        <h3 mat-line>
+          <a mat-button [routerLink]="['/plant-list', garden.id]">{{garden.name}}</a>
+          <router-outlet></router-outlet>
         </h3>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
   <button mat-flat-button color="primary" [routerLink]="['/garden-add']">Dodaj ogród</button>
 </mat-card>
+

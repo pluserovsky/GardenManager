@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlantService } from '../shared/plant/plant.service';
+import {Subscription} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-plant-list',
@@ -8,12 +10,17 @@ import { PlantService } from '../shared/plant/plant.service';
 })
 export class PlantListComponent implements OnInit {
 	plants: Array<any>;
-  constructor(private plantService: PlantService) { }
+  sub: Subscription;
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private plantService: PlantService) { }
 
   ngOnInit() {
-	  this.plantService.getAll().subscribe(data => {
-      this.plants = data;
+    this.sub = this.route.params.subscribe(params => {
+      const id = params['id'];
+      this.plantService.getAll(id).subscribe(data => {
+        this.plants = data;
+      });
     });
   }
-
 }

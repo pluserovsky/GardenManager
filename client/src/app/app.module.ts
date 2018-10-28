@@ -22,10 +22,11 @@ const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'garden-list', component: GardenListComponent},
-  {path: 'plant-list', component: PlantListComponent},
+  {path: 'plant-list/:id', component: PlantListComponent},
   {path: 'garden-add', component: GardenEditComponent},
   {path: 'garden-edit/:id', component: GardenEditComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
+  //{path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];
 
 /**const appRoutes: Routes = [
@@ -67,8 +68,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     NgxPaginationModule
   ],
-  providers:
-  /** [PlantService],**/  [GardenService],
+  providers: [
+  [PlantService],  [GardenService]
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

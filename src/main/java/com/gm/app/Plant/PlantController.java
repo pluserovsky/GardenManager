@@ -22,7 +22,7 @@ public class PlantController {
         this.plantRepository = plantRepository;
     }
 
-    @GetMapping("/gardens/{gardenId}/serve-plants")
+    @GetMapping("/gardens/{gardenId}/plants")
     @CrossOrigin(origins = "http://localhost:4200")
     public Collection<Plant> getAllPlantsByGardenId(@PathVariable (value = "gardenId") Long gardenId, Pageable pageable) {
         return plantRepository.findByGardenId(gardenId, pageable);
