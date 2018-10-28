@@ -1,4 +1,4 @@
-package com.gm.app;
+package com.gm.app.User;
 
 import lombok.*;
 

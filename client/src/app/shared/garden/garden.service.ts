@@ -3,22 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class PlantService {
+export class GardenService {
   public API = '//localhost:8080';
-  public PLANT_API = this.API + '/plants';
+  public GARDEN_API = this.API + '/gardens';
   constructor(private http: HttpClient) { }
-	getAll(): Observable<any> {
-    return this.http.get('//localhost:8080/serve-plants');
+  getAll(): Observable<any> {
+    return this.http.get('//localhost:8080/serve-gardens');
   }
   get(id: string) {
-    return this.http.get(this.PLANT_API + '/' + id);
+    return this.http.get(this.GARDEN_API + '/' + id);
   }
-  save(plant: any): Observable<any> {
+  save(garden: any): Observable<any> {
     let result: Observable<Object>;
-    if (plant['href']) {
-      result = this.http.put(plant.href, plant);
+    if (garden['href']) {
+      result = this.http.put(garden.href, garden);
     } else {
-      result = this.http.post(this.PLANT_API, plant);
+      result = this.http.post(this.GARDEN_API, garden);
     }
     return result;
   }
@@ -27,3 +27,4 @@ export class PlantService {
     return this.http.delete(href);
   }
 }
+

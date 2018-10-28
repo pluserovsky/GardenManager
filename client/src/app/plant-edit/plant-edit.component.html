@@ -1,7 +1,7 @@
 <mat-card>
   <form #plantForm="ngForm" (ngSubmit)="save(plantForm.value)">
     <mat-card-header>
-      <mat-card-title><h2>{{plant.name ? 'Edit' : 'Add'}} Plant</h2></mat-card-title>
+      <mat-card-title><h2>{{plant.name ? 'Edytuj' : 'Dodaj'}} roślinę</h2></mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <input type="hidden" name="href" [(ngModel)]="plant.href">
@@ -12,10 +12,10 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit"
-              [disabled]="!plantForm.form.valid">Save</button>
+              [disabled]="!plantForm.form.valid">Zapisz</button>
       <button mat-raised-button color="secondary" (click)="remove(plant.href)"
-              *ngIf="plant.href" type="button">Delete</button>
-      <a mat-button routerLink="/plant-list">Cancel</a>
+              *ngIf="plant.href" type="button">Usuń</button>
+      <a mat-button routerLink="/plant-list">Anuluj</a>
     </mat-card-actions>
     <mat-card-footer>
       <!--<div class="giphy">
