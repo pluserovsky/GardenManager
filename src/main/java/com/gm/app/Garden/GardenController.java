@@ -41,6 +41,7 @@ public class GardenController {
 
     @PostMapping("/add-garden")
     public Garden createGarden(@Valid @RequestBody Garden garden) {
+        System.out.println("garden.setOwnerID((long) 69);");
         return gardenRepository.save(garden);
     }
 

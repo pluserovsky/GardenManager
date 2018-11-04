@@ -2,17 +2,15 @@ package com.gm.app.User;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping(path="/users")
+import java.util.List;
+import java.util.Optional;
+
+@RestController
 public class UserController {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping(path="/add-user") // Map ONLY GET Requests
     public @ResponseBody String addNewUser (@RequestParam String name
@@ -22,12 +20,27 @@ public class UserController {
         User n = new User();
         n.setName(name);
         n.setEmail(email);
-        userRepository.save(n);
+        userService.save(n);
         return "Saved";
     }
 
     @GetMapping(path="/all-users")
     public @ResponseBody Iterable<User> getAllUsers() {
-        return userRepository.findAll();
+        return userService.findAll();
+    }
+
+    @RequestMapping(value="/user", method = RequestMethod.GET)
+    public List<User> listUser(){
+        return userService.findAll();
+    }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public Optional<User> getOne(@PathVariable(value = "id") Long id){
+        return userService.findById(id);
+    }
+
+    @RequestMapping(value="/signup", method = RequestMethod.POST)
+    public User saveUser(@RequestBody User user){
+        return userService.save(user);
     }
 }

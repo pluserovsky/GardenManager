@@ -1,13 +1,21 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {InjectionToken, NgModule} from '@angular/core';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {FormControl, FormsModule, Validators, NgControl} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialog,
+  MatInputModule,
+  MatListModule,
+  MatToolbarModule,
+  MatGridListModule
+} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import { CommonModule } from '@angular/common';
 import {PlantService} from './shared/plant/plant.service';
 import {GardenService} from './shared/garden/garden.service';
 
@@ -17,6 +25,12 @@ import {GardenListComponent} from './garden-list/garden-list.component';
 import {GardenEditComponent} from './garden-edit/garden-edit.component';
 import {HomeComponent} from './home/home.component';
 import {AboutComponent} from './about/about.component';
+import {Interceptor} from "./app.interceptor";
+import {AuthService} from "./shared/auth/auth.service";
+import {TokenStorage} from "./shared/token/token.storage";
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import {CustomMaterialModule} from "./material.module";
+
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -53,24 +67,37 @@ const appRoutes: Routes = [
     GardenListComponent,
     GardenEditComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    CustomMaterialModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
     MatInputModule,
     MatListModule,
     MatToolbarModule,
+    MatGridListModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    NgxPaginationModule
+    NgxPaginationModule,
+    CommonModule,
   ],
-  providers: [
-  [PlantService],  [GardenService]
+  exports:[
+    RouterModule,
+    MatToolbarModule,
+    MatButtonModule,
+    CommonModule
   ],
+ entryComponents: [ErrorDialogComponent],
+  providers: [ErrorDialogComponent, PlantService, GardenService, AuthService, TokenStorage,
+    {provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi : true}
+],
   bootstrap: [AppComponent]
 })
 export class AppModule {

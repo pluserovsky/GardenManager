@@ -1,11 +1,9 @@
 package com.gm.app.User;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 @Getter @Setter
@@ -17,4 +15,7 @@ public class User {
     private Long id;
     private @NonNull String name;
     private String email;
+    private String username;
+    //@JsonIgnore
+    private String password;
 }
