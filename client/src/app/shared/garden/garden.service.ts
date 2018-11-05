@@ -7,8 +7,8 @@ export class GardenService {
   public API = '//localhost:8080';
   public GARDEN_API = this.API + '/gardens';
   constructor(private http: HttpClient) { }
-  getAll(): Observable<any> {
-    return this.http.get('//localhost:8080/serve-gardens');
+  getAll(username: string): Observable<any> {
+    return this.http.get('//localhost:8080/' + username + '/gardens' );
   }
   get(id: string) {
     return this.http.get(this.GARDEN_API + '/' + id);

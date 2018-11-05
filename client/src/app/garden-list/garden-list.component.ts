@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GardenService } from '../shared/garden/garden.service';
+import {Subscription} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-garden-list',
@@ -8,13 +10,18 @@ import { GardenService } from '../shared/garden/garden.service';
 })
 export class GardenListComponent implements OnInit {
   gardens: Array<any>;
-
-  constructor(private gardenService: GardenService) {
-  }
+  sub: Subscription;
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private gardenService: GardenService,
+             ) { }
 
   ngOnInit() {
-    this.gardenService.getAll().subscribe(data => {
-      this.gardens = data;
+    this.sub = this.route.params.subscribe(params => {
+      const username = sessionStorage.getItem("AuthUsername");
+      this.gardenService.getAll(username).subscribe(data => {
+        this.gardens = data;
+      });
     });
   }
 

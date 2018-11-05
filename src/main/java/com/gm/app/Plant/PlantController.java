@@ -30,7 +30,7 @@ public class PlantController {
     @PostMapping("/gardens/{gardenId}/add-plant")
     public Plant createPlant(@PathVariable (value = "gardenId") Long gardenId,
                                  @Valid @RequestBody Plant plant) {
-        return gardenRepository.findById(gardenId).map(garden -> {
+        return gardenRepository.findById(String.valueOf(gardenId)).map(garden -> {
             plant.setGarden(garden);
             return plantRepository.save(plant);
         }).orElseThrow(() -> new ResourceNotFoundException("GardenId " + gardenId + " not found"));
@@ -40,7 +40,7 @@ public class PlantController {
     public Plant updatePlant(@PathVariable (value = "gardenId") Long gardenId,
                                  @PathVariable (value = "plantId") Long plantId,
                                  @Valid @RequestBody Plant plantRequest) {
-        if(!gardenRepository.existsById(gardenId)) {
+        if(!gardenRepository.existsById(String.valueOf(gardenId))) {
             throw new ResourceNotFoundException("GardenId " + gardenId + " not found");
         }
 
@@ -53,7 +53,7 @@ public class PlantController {
     @DeleteMapping("/gardens/{gardenId}/plants/{plantId}")
     public ResponseEntity<?> deletePlant(@PathVariable (value = "gardenId") Long gardenId,
                                          @PathVariable (value = "plantId") Long plantId) {
-        if(!gardenRepository.existsById(gardenId)) {
+        if(!gardenRepository.existsById(String.valueOf(gardenId))) {
             throw new ResourceNotFoundException("gardenId " + gardenId + " not found");
         }
 

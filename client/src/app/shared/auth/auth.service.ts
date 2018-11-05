@@ -10,7 +10,7 @@ export class AuthService {
 
   attemptAuth(username: string, password: string): Observable<any> {
     const credentials = {username: username, password: password};
-    console.log('attempAuth ::');
+    sessionStorage.setItem("AuthUsername", username);
     return this.http.post('http://localhost:8080/token/generate-token', credentials);
   }
 

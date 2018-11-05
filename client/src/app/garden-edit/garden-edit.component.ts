@@ -45,6 +45,9 @@ export class GardenEditComponent implements OnInit, OnDestroy {
   }
 
   save(form: NgForm) {
+    form.a
+    form.setValue(sessionStorage.getItem("AuthUsername"): p);
+    console.log(form.value.username);
     this.gardenService.save(form).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));

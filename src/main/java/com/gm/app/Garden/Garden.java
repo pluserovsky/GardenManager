@@ -16,8 +16,8 @@ public class Garden extends AuditModel {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(name = "owner_id", nullable = false)
-    private Long ownerID;
+    @Column(name = "username", nullable = false)
+    private String username;
     private @NonNull
     String name;
 }
