@@ -13,12 +13,12 @@ export class GardenService {
   get(id: string) {
     return this.http.get(this.GARDEN_API + '/' + id);
   }
-  save(garden: any): Observable<any> {
+  save(garden: any, username: string): Observable<any> {
     let result: Observable<Object>;
     if (garden['href']) {
       result = this.http.put(garden.href, garden);
     } else {
-      result = this.http.post(this.GARDEN_API, garden);
+      result = this.http.post('//localhost:8080/' + username + '/add-gardens', garden);
     }
     return result;
   }

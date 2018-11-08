@@ -41,8 +41,9 @@ public class GardenController {
         }).orElseThrow(() -> new ResourceNotFoundException("GardenId " + gardenId + " not found"));
     }
 
-    @PostMapping("/add-garden")
-    public Garden createGarden(@Valid @RequestBody Garden garden) {
+    @PostMapping("/{username}/add-gardens")
+    public Garden createGarden(@Valid @RequestBody Garden garden, @PathVariable (value = "username") String username) {
+        garden.setUsername(username);
         return gardenRepository.save(garden);
     }
 
