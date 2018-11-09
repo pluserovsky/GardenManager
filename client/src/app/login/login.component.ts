@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginModel } from '../models/login.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, NgForm, NgModel} from '@angular/forms';
 import {AuthService} from "../shared/auth/auth.service";
 import {TokenStorage} from "../shared/token/token.storage";
 import {Router} from "@angular/router";
@@ -17,9 +17,8 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   user: LoginModel = new LoginModel(null,null);
-  loginForm: FormGroup;
   hide = true;
-
+  info: any;
   constructor(private formBuilder: FormBuilder, private router: Router, public dialog: MatDialog, private authService: AuthService, private token: TokenStorage) { }
 
   ngOnInit() {
@@ -27,21 +26,15 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.roles = this.token.getAuthorities();
     }
-    else {
-      this.loginForm = this.formBuilder.group({
-        'username': [this.user.username, [
-          Validators.required,
-        ]],
-        'password': [this.user.password, [
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(30)
-        ]]
-      });
-    }
+    this.info = {
+      token: sessionStorage.getItem("AuthToken"),
+      username:  sessionStorage.getItem("AuthUsername"),
+      authorities: sessionStorage.getItem("AuthAuthorities"),
+    };
   }
 
   onLoginSubmit() {
+
     this.authService.attemptAuth(this.user.username, this.user.password).subscribe(
       data => {
         this.token.saveToken(data.token);

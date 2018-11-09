@@ -3,30 +3,28 @@
     <mat-card-title><h2>Informacje o koncie</h2></mat-card-title>
   </mat-card-header>
   <p>
-    <strong>Nazwa użytkownika:</strong> {{user.username}}<br/>
+    <strong>Nazwa użytkownika:</strong> {{info.username}}<br/>
     <strong>Typ konta:</strong> <br />
   </p>
   <button class="mat-raised-button mat-primary" (click)="logout()">Wyloguj</button>
 </mat-card>
 <ng-template #loggedOut>
 <mat-card class="medium-list">
-    <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && onLoginSubmit()" novalidate>
+    <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && onLoginSubmit()" novalidate>
     <mat-card-header class="do-center">
       <mat-card-title class="dashboard-card-content"><h2>Logowanie</h2></mat-card-title>
         </mat-card-header>
         <mat-card-content>
         <mat-form-field>
-          <input id="email"
+          <input name="username"
                  matInput
-                 formControlName="username"
                  [(ngModel)]="user.username"
                  placeholder="Nazwa użtykownika" required/>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input id="password"
+          <input name="password"
                  matInput
-                 formControlName="password"
                  [(ngModel)]="user.password"
                  placeholder="Hasło"
                  [type]="hide ? 'password':'text'" required/>
