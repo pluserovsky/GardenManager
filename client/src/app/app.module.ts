@@ -5,6 +5,7 @@ import {FormControl, FormsModule, Validators, NgControl} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import{ReactiveFormsModule} from '@angular/forms'
 import {
   MatButtonModule,
   MatCardModule,
@@ -30,16 +31,21 @@ import {AuthService} from "./shared/auth/auth.service";
 import {TokenStorage} from "./shared/token/token.storage";
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import {CustomMaterialModule} from "./material.module";
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import {UserService} from "./shared/user/user.service";
 
 
 const appRoutes: Routes = [
-  {path: 'home', component: HomeComponent},
+  {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'garden-list', component: GardenListComponent},
   {path: 'plant-list/:id', component: PlantListComponent},
   {path: 'garden-add', component: GardenEditComponent},
   {path: 'garden-edit/:id', component: GardenEditComponent},
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent},
   //{path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];
 
@@ -68,7 +74,10 @@ const appRoutes: Routes = [
     GardenEditComponent,
     HomeComponent,
     AboutComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    LoginComponent,
+    RegisterComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
@@ -85,6 +94,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     NgxPaginationModule,
     CommonModule,
+    ReactiveFormsModule
   ],
   exports:[
     RouterModule,
@@ -93,7 +103,7 @@ const appRoutes: Routes = [
     CommonModule
   ],
  entryComponents: [ErrorDialogComponent],
-  providers: [ErrorDialogComponent, PlantService, GardenService, AuthService, TokenStorage,
+  providers: [ErrorDialogComponent, PlantService, GardenService, AuthService, TokenStorage, UserService,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true}

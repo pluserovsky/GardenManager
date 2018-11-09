@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-button routerLink="/">Mój Ogród</button>
+    <span><img src="./assets/logo.png" width="40" height="40"></span>
+    <button mat-flat-button color="primary" [routerLink]="['/about']">O programie</button>
+    <button mat-flat-button color="secondary" [routerLink]="['/garden-list']">Moje ogrody</button>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/login">Logowanie</button>
+  </mat-toolbar-row>
+</mat-toolbar>
