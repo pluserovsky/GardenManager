@@ -6,15 +6,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import{ReactiveFormsModule} from '@angular/forms'
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatDialog,
-  MatInputModule,
-  MatListModule,
-  MatToolbarModule,
-  MatGridListModule
-} from '@angular/material';
+import {FlexLayoutModule} from '@angular/flex-layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import {PlantService} from './shared/plant/plant.service';
@@ -36,35 +28,18 @@ import { RegisterComponent } from './register/register.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import {UserService} from "./shared/user/user.service";
 
-
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'garden-list', component: GardenListComponent},
   {path: 'plant-list/:id', component: PlantListComponent},
   {path: 'garden-add', component: GardenEditComponent},
+  {path: 'plant-add', component: PlantEditComponent},
   {path: 'garden-edit/:id', component: GardenEditComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  //{path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];
 
-/**const appRoutes: Routes = [
- { path: '', redirectTo: '/plant-list', pathMatch: 'full' },
- {
-    path: 'plant-list',
-    component: PlantListComponent
-  },
- {
-    path: 'plant-add',
-    component: PlantEditComponent
-  },
- {
-    path: 'plant-edit/:id',
-    component: PlantEditComponent
-  }
- ];
- **/
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,22 +59,16 @@ const appRoutes: Routes = [
     HttpClientModule,
     CustomMaterialModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
-    MatListModule,
-    MatToolbarModule,
-    MatGridListModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     NgxPaginationModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   exports:[
     RouterModule,
-    MatToolbarModule,
-    MatButtonModule,
+
     CommonModule
   ],
  entryComponents: [ErrorDialogComponent],

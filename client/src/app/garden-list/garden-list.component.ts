@@ -16,13 +16,24 @@ export class GardenListComponent implements OnInit {
               private gardenService: GardenService,
              ) { }
 
+  displayedColumns = ['id', 'name', 'description', 'createdAt','updatedAt','delete','open'];
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      const username = sessionStorage.getItem("AuthUsername");
-      this.gardenService.getAll(username).subscribe(data => {
-        this.gardens = data;
+    if (sessionStorage.getItem("AuthToken")) {
+      this.sub = this.route.params.subscribe(params => {
+        const username = sessionStorage.getItem("AuthUsername");
+        this.gardenService.getAll(username).subscribe(data => {
+          this.gardens = data;
+        });
       });
-    });
+    }
+    else this.router.navigate(['/login']);
   }
-
+  remove(href) {
+    this.gardenService.remove(href,sessionStorage.getItem("AuthUsername")).subscribe(result => {
+      this.gotoList();
+    }, error => console.error(error));
+  }
+  gotoList() {
+    this.router.navigate(['/garden-list']);
+  }
 }

@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.token.getAuthorities();
+        window.location.reload();
         this.router.navigate(['garden-list']);
       },
       error => {
@@ -51,11 +52,10 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       }
     );
-    console.log(this.user.username + ' ' + this.user.password);
   }
   logout() {
     sessionStorage.clear();
-    window.location.reload();
+    this.router.navigate(['/']);
   }
 
 }

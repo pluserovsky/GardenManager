@@ -1,20 +1,68 @@
-<mat-card>
-  <mat-card-header>Lista moich ogrodów</mat-card-header>
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let garden of gardens">
-
-        <!--<img mat-list-avatar src="{{plant.giphyUrl}}" alt="{{plant.name}}">
-         <a mat-button [routerLink]="['/plant-list', garden.id]">{{garden.name}}</a>
-          <a mat-button [routerLink]="['/garden-edit', garden.id]">{{garden.name}}</a>
-         -->
-        <h3 mat-line>
-          <a mat-button [routerLink]="['/plant-list', garden.id]">{{garden.name}}</a>
-          <router-outlet></router-outlet>
-        </h3>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-  <button mat-flat-button color="primary" [routerLink]="['/garden-add']">Dodaj ogród</button>
-</mat-card>
-
+<div>
+  <br>
+  <div class="container">
+    <div class="container">
+      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+        <div class="blocks">
+          <button mat-raised-button color="primary" [routerLink]="['/garden-add']">
+            <mat-icon>add</mat-icon> Dodaj ogród
+          </button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <div fxLayout="row" fxLayoutAlign="center center" class="content">
+        <mat-card class="card" >
+          <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3>Moje ogrody</h3>
+          </mat-card-title>
+          <mat-card-content>
+            <div class="example-container mat-elevation-z8">
+              <mat-table #table [dataSource]="gardens">
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="description">
+                  <mat-header-cell *matHeaderCellDef> Opis </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="createdAt">
+                  <mat-header-cell *matHeaderCellDef> Utworzony </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.createdAt  | date: 'd/M/y HH:MM'}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="updatedAt">
+                  <mat-header-cell *matHeaderCellDef> Ostatnio modyfikowany </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.updatedAt  | date: 'd/M/y HH:MM'}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="delete">
+                  <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <a (click)="remove(element.id)" type="button">
+                      <mat-icon class="icon">delete</mat-icon>
+                    </a>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="open">
+                  <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <a [routerLink]="['/plant-list', element.id]" type="button">
+                      <mat-icon class="icon">arrow-right-alt</mat-icon>
+                    </a>
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

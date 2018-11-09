@@ -1,27 +1,27 @@
-<mat-card>
+<mat-card class="medium-list">
   <form #gardenForm="ngForm" (ngSubmit)="save(gardenForm.value)">
-    <mat-card-header>
+    <mat-card-header class="do-center">
       <mat-card-title><h2>{{garden.name ? 'Edytuj' : 'Dodaj'}} ogród</h2></mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <input type="hidden" name="href" [(ngModel)]="garden.href">
       <mat-form-field>
-        <input matInput placeholder="Nazwa ogrodu" [(ngModel)]="garden.name"
-               required name="name" #name><br>
+        <input matInput placeholder="Nazwa" [(ngModel)]="garden.name"
+               required name="name" #name>
+      </mat-form-field><br>
+      <mat-form-field>
+        <input matInput placeholder="Opis" [(ngModel)]="garden.description"
+               required name="description" #description><br>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit"
               [disabled]="!gardenForm.form.valid">Zapisz</button>
       <button mat-raised-button color="secondary" (click)="remove(garden.href)"
-              *ngIf="garden.href" type="button">Usuń</button>
-      <a mat-button routerLink="/garden-list">Anuluj</a>
+              *ngIf="garden.href" type="button" color="error">Usuń</button>
+      <a mat-button routerLink="/garden-list" color="warn">Anuluj</a>
     </mat-card-actions>
     <mat-card-footer>
-      <!--<div class="giphy">
-        <img src="{{garden.giphyUrl}}" alt="{{garden.name}}">
-         <input type="hidden" ngDefaultControl="username" name="username" [(ngModel)]="garden.username">
-      </div>-->
     </mat-card-footer>
   </form>
 </mat-card>

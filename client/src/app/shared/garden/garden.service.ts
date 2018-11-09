@@ -23,8 +23,8 @@ export class GardenService {
     return result;
   }
 
-  remove(href: string) {
-    return this.http.delete(href);
+  remove(id: string,username: string) {
+    return this.http.delete('//localhost:8080/' + username + '/delete-garden/'+ id);
   }
 }
 

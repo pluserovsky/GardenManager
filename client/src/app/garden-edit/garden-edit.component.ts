@@ -54,7 +54,7 @@ export class GardenEditComponent implements OnInit, OnDestroy {
   }
 
   remove(href) {
-    this.gardenService.remove(href).subscribe(result => {
+    this.gardenService.remove(href,sessionStorage.getItem("AuthUsername")).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }
