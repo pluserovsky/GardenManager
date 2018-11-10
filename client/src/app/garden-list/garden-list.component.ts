@@ -11,13 +11,15 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class GardenListComponent implements OnInit {
   gardens: Array<any>;
   sub: Subscription;
+  i: number;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private gardenService: GardenService,
              ) { }
 
-  displayedColumns = ['id', 'name', 'description', 'createdAt','updatedAt','delete','open'];
+  displayedColumns = ['id', 'name', 'description', 'createdAt','updatedAt','open','edit','delete'];
   ngOnInit() {
+    this.i =0;
     if (sessionStorage.getItem("AuthToken")) {
       this.sub = this.route.params.subscribe(params => {
         const username = sessionStorage.getItem("AuthUsername");

@@ -23,10 +23,10 @@ export class GardenEditComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.gardenService.get(id).subscribe((garden: any) => {
+        this.gardenService.get(sessionStorage.getItem("AuthUsername"),id).subscribe((garden: any) => {
           if (garden) {
             this.garden = garden;
-            this.garden.href = garden._links.self.href;
+            this.garden.href = id;
             //this.giphyService.get(garden.name).subscribe(url => garden.giphyUrl = url);
           } else {
             console.log(`Garden with id '${id}' not found, returning to list`);
@@ -55,6 +55,12 @@ export class GardenEditComponent implements OnInit, OnDestroy {
 
   remove(href) {
     this.gardenService.remove(href,sessionStorage.getItem("AuthUsername")).subscribe(result => {
+      this.gotoList();
+    }, error => console.error(error));
+  }
+
+  update(form: NgForm,href) {
+    this.gardenService.update(form,href,sessionStorage.getItem("AuthUsername")).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }

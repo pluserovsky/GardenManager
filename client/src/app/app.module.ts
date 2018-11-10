@@ -64,7 +64,7 @@ const appRoutes: Routes = [
     NgxPaginationModule,
     CommonModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   exports:[
     RouterModule,

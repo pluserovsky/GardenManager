@@ -4,27 +4,31 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class GardenService {
-  public API = '//localhost:8080';
+  public API = '//localhost:8080/';
   public GARDEN_API = this.API + '/gardens';
   constructor(private http: HttpClient) { }
   getAll(username: string): Observable<any> {
-    return this.http.get('//localhost:8080/' + username + '/gardens' );
+    return this.http.get(this.API + username + '/gardens' );
   }
-  get(id: string) {
-    return this.http.get(this.GARDEN_API + '/' + id);
+  get(username: string, id: string) {
+    return this.http.get(this.API + username +"/get-garden/"+ id);
   }
   save(garden: any, username: string): Observable<any> {
     let result: Observable<Object>;
     if (garden['href']) {
-      result = this.http.put(garden.href, garden);
+      result = this.http.put(this.API+ username +"/update-garden/"+garden.href, garden);
     } else {
-      result = this.http.post('//localhost:8080/' + username + '/add-gardens', garden);
+      result = this.http.post(this.API + username + '/add-gardens', garden);
     }
     return result;
   }
 
+  update(garden: any, username: string, id:string){
+    return this.http.put(this.API+  username +"/update-garden/"+id, garden);
+  }
+
   remove(id: string,username: string) {
-    return this.http.delete('//localhost:8080/' + username + '/delete-garden/'+ id);
+    return this.http.delete(this.API + username + '/delete-garden/'+ id);
   }
 }
 

@@ -15,11 +15,11 @@
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit"
-              [disabled]="!gardenForm.form.valid">Zapisz</button>
-      <button mat-raised-button color="secondary" (click)="remove(garden.href)"
-              *ngIf="garden.href" type="button" color="error">Usuń</button>
-      <a mat-button routerLink="/garden-list" color="warn">Anuluj</a>
+      <button mat-button type="submit" class="mat-raised-button mat-primary"
+              [disabled]="!gardenForm.form.valid" class="divider">Zapisz</button>
+      <button mat-button type="submit" (click)="remove(garden.href)"
+              *ngIf="garden.href" color="warn" class="divider">Usuń</button>
+      <button mat-button routerLink="/garden-list" color="yellow" class="divider">Anuluj</button>
     </mat-card-actions>
     <mat-card-footer>
     </mat-card-footer>
