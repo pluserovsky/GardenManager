@@ -31,10 +31,11 @@ import {UserService} from "./shared/user/user.service";
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
-  {path: 'garden-list', component: GardenListComponent},
+  {path: 'garden-list', component: GardenListComponent, children:[]},
   {path: 'plant-list/:id', component: PlantListComponent},
   {path: 'garden-add', component: GardenEditComponent},
-  {path: 'plant-add', component: PlantEditComponent},
+  {path: 'garden/:gid/plant-add', component: PlantEditComponent},
+  {path: 'garden/:gid/plant-edit/:pid', component: PlantEditComponent},
   {path: 'garden-edit/:id', component: GardenEditComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},

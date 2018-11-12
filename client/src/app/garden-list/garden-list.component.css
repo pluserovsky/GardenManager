@@ -32,3 +32,17 @@
 a {
   cursor: pointer;
 }
+.edit{
+  text-decoration: none;
+  color: orange;
+}
+
+.delete{
+  text-decoration: none;
+  color: red;
+}
+.open{
+  text-decoration: none;
+  color: green;
+}
+

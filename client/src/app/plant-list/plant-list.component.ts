@@ -11,16 +11,29 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class PlantListComponent implements OnInit {
 	plants: Array<any>;
   sub: Subscription;
+  garden_id: number;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private plantService: PlantService) { }
+  displayedColumns = ['id', 'name', 'description','notes', 'createdAt','updatedAt',
+  'isHydrated','isFertilized','isExaggerated','isMedicine','open','edit','delete'];
 
   ngOnInit() {
+
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
+      this.garden_id = params['id'];
       this.plantService.getAll(id).subscribe(data => {
         this.plants = data;
       });
     });
+  }
+  remove(plant_id) {
+    this.plantService.remove(this.garden_id, plant_id).subscribe(result => {
+      window.location.reload();
+    }, error => console.error(error));
+  }
+  gotoList() {
+    this.router.navigate(['/plant-list/',this.garden_id]);
   }
 }

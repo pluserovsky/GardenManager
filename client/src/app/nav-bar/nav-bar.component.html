@@ -21,7 +21,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar color="warn">
       <div fxHide.gt-xs>
         <button mat-icon-button>
           <mat-icon>menu</mat-icon>
@@ -42,15 +42,15 @@
             </a>
           </li>
           <li>
-            <a [routerLink]="['/about']">
-              <mat-icon class="icon">about</mat-icon>
-              <span class="label">O programie</span>
-            </a>
-          </li>
-          <li>
             <a [routerLink]="['/garden-list']">
               <mat-icon class="icon">dashboard</mat-icon>
               <span class="label">Menadżer ogrodów</span>
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/about']">
+              <mat-icon class="icon">about</mat-icon>
+              <span class="label">O programie</span>
             </a>
           </li>
           <li>

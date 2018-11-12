@@ -4,26 +4,25 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PlantService {
-  public API = '//localhost:8080';
-  public PLANT_API = this.API + '/plants';
+  public API = '//localhost:8080/gardens/';
   constructor(private http: HttpClient) { }
-	getAll(id: string): Observable<any> {
-    return this.http.get('//localhost:8080/gardens/' + id+ '/plants');
+	getAll(gid: string ): Observable<any> {
+    return this.http.get(this.API + gid+ '/plants');
   }
-  get(id: string) {
-    return this.http.get(this.PLANT_API + '/' + id);
+  get(gid: number, pid: number) {
+    return this.http.get(this.API+gid+'/plant/' +pid);
   }
-  save(plant: any): Observable<any> {
+  save(plant: any, gid: number): Observable<any> {
     let result: Observable<Object>;
     if (plant['href']) {
       result = this.http.put(plant.href, plant);
     } else {
-      result = this.http.post(this.PLANT_API, plant);
+      result = this.http.post(this.API+gid+'/add-plant', plant);
     }
     return result;
   }
 
-  remove(href: string) {
-    return this.http.delete(href);
+  remove(gid: number, pid: number) {
+    return this.http.delete(this.API+ gid+"/plant/"+pid);
   }
 }

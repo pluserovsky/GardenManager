@@ -1,0 +1,49 @@
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.example-card {
+  width: 400px;
+  margin: 10% auto;
+}
+.mat-card-title{
+  font-size: 16px;
+}
+
+.card {
+  min-width: 80%;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+.edit{
+  text-decoration: none;
+  color: orange;
+}
+
+.delete{
+  text-decoration: none;
+  color: red;
+}
+.open{
+  text-decoration: none;
+  color: green;
+}
+

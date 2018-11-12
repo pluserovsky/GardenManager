@@ -32,7 +32,7 @@ export class GardenListComponent implements OnInit {
   }
   remove(href) {
     this.gardenService.remove(href,sessionStorage.getItem("AuthUsername")).subscribe(result => {
-      this.gotoList();
+      window.location.reload();
     }, error => console.error(error));
   }
   gotoList() {

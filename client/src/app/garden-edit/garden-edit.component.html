@@ -10,8 +10,8 @@
                required name="name" #name>
       </mat-form-field><br>
       <mat-form-field>
-        <input matInput placeholder="Opis" [(ngModel)]="garden.description"
-               required name="description" #description><br>
+        <textarea matInput placeholder="Opis" [(ngModel)]="garden.description"
+                  required name="description" #description></textarea><br>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
