@@ -1,4 +1,4 @@
-package com.gm.app.User;
+package com.gm.app.model;
 
 import lombok.Getter;
 import lombok.Setter;

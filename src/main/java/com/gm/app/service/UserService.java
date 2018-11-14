@@ -1,5 +1,8 @@
-package com.gm.app.User;
+package com.gm.app.service;
 
+import com.gm.app.model.User;
+import com.gm.app.repository.UserRepository;
+import com.gm.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +18,7 @@ import java.util.Optional;
 
 
 @Service(value = "userService")
-public class UserServiceImpl implements UserDetailsService, UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -41,26 +44,21 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return list;
     }
 
-    @Override
     public void delete(long id) {
         userRepository.deleteById(id);
     }
 
-    @Override
     public User findOne(String username) {
         return userRepository.findByUsername(username);
     }
 
-   @Override
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }
 
-    @Override
     public User save(User user) {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
-  //     newUser.setPassword(user.getPassword());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setName(user.getName());
         newUser.setEmail(user.getEmail());

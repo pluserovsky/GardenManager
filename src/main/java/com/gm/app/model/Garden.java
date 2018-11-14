@@ -1,6 +1,5 @@
-package com.gm.app.Garden;
+package com.gm.app.model;
 
-import com.gm.app.AuditModel;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +9,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 @Data
 public class Garden extends AuditModel {
     @Id
@@ -20,4 +18,5 @@ public class Garden extends AuditModel {
     private String username;
     private @NonNull
     String name;
+    String description;
 }

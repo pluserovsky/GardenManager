@@ -1,6 +1,6 @@
 <div>
   <br>
-  <div class="container">
+  <div >
     <div class="container">
       <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
         <div class="blocks">
@@ -15,9 +15,9 @@
     </div>
 
     <br>
-    <div class="container">
+    <div >
       <div>
-        <mat-card class="card" >
+        <mat-card >
           <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
             <h3>Rośliny w ogrodzie:</h3>
           </mat-card-title>
@@ -68,13 +68,7 @@
                   <mat-cell *matCellDef="let element"> <mat-slide-toggle
                     [checked]="element.medicine "></mat-slide-toggle> </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="open">
-                  <mat-header-cell *matHeaderCellDef>Przejdź do rośliny</mat-header-cell>
-                  <mat-cell *matCellDef="let element">
-                    <a [routerLink]="['/plant-list', element.id]" type="button">
-                      <mat-icon class="open">input</mat-icon></a>
-                  </mat-cell>
-                </ng-container>
+
                 <ng-container matColumnDef="edit">
                   <mat-header-cell *matHeaderCellDef>Edytuj</mat-header-cell>
                   <mat-cell *matCellDef="let element">

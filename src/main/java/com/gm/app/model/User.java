@@ -1,4 +1,4 @@
-package com.gm.app.User;
+package com.gm.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

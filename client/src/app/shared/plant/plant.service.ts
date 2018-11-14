@@ -15,12 +15,15 @@ export class PlantService {
   save(plant: any, gid: number): Observable<any> {
     let result: Observable<Object>;
     if (plant['href']) {
-      result = this.http.put(plant.href, plant);
+      result = this.http.put(this.API+gid+'/update-plant/'+ plant.href, plant);
     } else {
       result = this.http.post(this.API+gid+'/add-plant', plant);
     }
     return result;
   }
+/*  update(gid: number ): Observable<any> {
+    return this.http.put(this.API + gid+ '/update-work');
+  }*/
 
   remove(gid: number, pid: number) {
     return this.http.delete(this.API+ gid+"/plant/"+pid);

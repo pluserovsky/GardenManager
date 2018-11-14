@@ -1,7 +1,8 @@
-package com.gm.app.Garden;
+package com.gm.app.controller;
 
-import com.gm.app.Plant.Plant;
-import com.gm.app.User.UserRepository;
+import com.gm.app.model.Garden;
+import com.gm.app.repository.GardenRepository;
+import com.gm.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -33,9 +34,10 @@ public class GardenController {
     public List<Garden> getAllGardensByUsername(@PathVariable (value = "username") String username, Pageable pageable) {
         return gardenRepository.findByUsername(username, pageable);
     }
-    @GetMapping("/serve-gardens/{gardenId}")
-    public Garden getGardenById(@PathVariable Long gardenId) {
-        return gardenRepository.findById(String.valueOf(gardenId)).map(garden -> {
+    @GetMapping("/{username}/get-garden/{gardenId}")
+    public Garden getGardenById(@PathVariable (value = "username") String username,@PathVariable Long gardenId) {
+        return gardenRepository.findById(gardenId).map(garden -> {
+            garden.setUsername(username);
             garden.getName();
             return gardenRepository.save(garden);
         }).orElseThrow(() -> new ResourceNotFoundException("GardenId " + gardenId + " not found"));
@@ -47,18 +49,20 @@ public class GardenController {
         return gardenRepository.save(garden);
     }
 
-    @PutMapping("/update-garden/{gardenId}")
-    public Garden updateGarden(@PathVariable Long gardenId, @Valid @RequestBody Garden gardenRequest) {
-        return gardenRepository.findById(String.valueOf(gardenId)).map(garden -> {
+    @PutMapping("/{username}/update-garden/{gardenId}")
+    public Garden updateGarden(@PathVariable (value = "username") String username,@PathVariable Long gardenId, @Valid @RequestBody Garden gardenRequest) {
+        return gardenRepository.findById(gardenId).map(garden -> {
+            garden.setUsername(username);
             garden.setName(gardenRequest.getName());
+            garden.setDescription(gardenRequest.getDescription());
             return gardenRepository.save(garden);
         }).orElseThrow(() -> new ResourceNotFoundException("GardenId " + gardenId + " not found"));
     }
 
-
-    @DeleteMapping("/delete-garden/{gardenId}")
-    public ResponseEntity<?> deleteGarden(@PathVariable Long gardenId) {
-        return gardenRepository.findById(String.valueOf(gardenId)).map(garden -> {
+    @DeleteMapping("/{username}/delete-garden/{gardenId}")
+    public ResponseEntity<?> deleteGarden(@PathVariable (value = "username") String username, @PathVariable Long gardenId) {
+        return gardenRepository.findById(gardenId).map(garden -> {
+            garden.setUsername(username);
             gardenRepository.delete(garden);
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("GardenId " + gardenId + " not found"));

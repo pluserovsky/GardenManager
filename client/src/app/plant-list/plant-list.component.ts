@@ -16,7 +16,7 @@ export class PlantListComponent implements OnInit {
               private router: Router,
               private plantService: PlantService) { }
   displayedColumns = ['id', 'name', 'description','notes', 'createdAt','updatedAt',
-  'isHydrated','isFertilized','isExaggerated','isMedicine','open','edit','delete'];
+  'isHydrated','isFertilized','isExaggerated','isMedicine','edit','delete'];
 
   ngOnInit() {
 
@@ -32,8 +32,5 @@ export class PlantListComponent implements OnInit {
     this.plantService.remove(this.garden_id, plant_id).subscribe(result => {
       window.location.reload();
     }, error => console.error(error));
-  }
-  gotoList() {
-    this.router.navigate(['/plant-list/',this.garden_id]);
   }
 }

@@ -1,5 +1,5 @@
 <mat-card class="medium-list">
-  <form #gardenForm="ngForm" (ngSubmit)="save(gardenForm.value)">
+  <form #gardenForm="ngForm">
     <mat-card-header class="do-center">
       <mat-card-title><h2>{{garden.name ? 'Edytuj' : 'Dodaj'}} ogród</h2></mat-card-title>
     </mat-card-header>
@@ -16,8 +16,8 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-button type="submit" class="mat-raised-button mat-primary"
-              [disabled]="!gardenForm.form.valid" class="divider">Zapisz</button>
-      <button mat-button type="submit" (click)="remove(garden.href)"
+              [disabled]="!gardenForm.form.valid" class="divider" (click)="save(gardenForm.value)">Zapisz</button>
+      <button mat-button (click)="remove(garden.href)"
               *ngIf="garden.href" color="warn" class="divider">Usuń</button>
       <button mat-button routerLink="/garden-list" color="yellow" class="divider">Anuluj</button>
     </mat-card-actions>

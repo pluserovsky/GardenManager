@@ -23,9 +23,6 @@ export class GardenService {
     return result;
   }
 
-  update(garden: any, username: string, id:string){
-    return this.http.put(this.API+  username +"/update-garden/"+id, garden);
-  }
 
   remove(id: string,username: string) {
     return this.http.delete(this.API + username + '/delete-garden/'+ id);

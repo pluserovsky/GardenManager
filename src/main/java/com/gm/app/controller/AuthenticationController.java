@@ -1,8 +1,8 @@
 package com.gm.app.controller;
 
-import com.gm.app.User.LoginUser;
-import com.gm.app.User.User;
-import com.gm.app.User.UserService;
+import com.gm.app.model.LoginUser;
+import com.gm.app.model.User;
+import com.gm.app.service.UserService;
 import com.gm.app.config.JwtTokenUtil;
 import com.gm.app.model.AuthToken;
 import org.springframework.beans.factory.annotation.Autowired;

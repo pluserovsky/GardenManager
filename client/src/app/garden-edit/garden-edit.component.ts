@@ -45,9 +45,6 @@ export class GardenEditComponent implements OnInit, OnDestroy {
   }
 
   save(form: NgForm) {
-   // form.setValue({username: sessionStorage.getItem("AuthUsername")});
-    //form.controls['username'].setValue(sessionStorage.getItem("AuthUsername"));
-    //console.log(form.get);
     this.gardenService.save(form, sessionStorage.getItem("AuthUsername") ).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
@@ -59,9 +56,4 @@ export class GardenEditComponent implements OnInit, OnDestroy {
     }, error => console.error(error));
   }
 
-  update(form: NgForm,href) {
-    this.gardenService.update(form,href,sessionStorage.getItem("AuthUsername")).subscribe(result => {
-      this.gotoList();
-    }, error => console.error(error));
-  }
 }
