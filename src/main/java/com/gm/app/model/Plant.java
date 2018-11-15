@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,7 +18,7 @@ import java.util.Date;
 @Data
 public class Plant extends AuditModel {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private @NonNull
     String name;
@@ -35,11 +36,12 @@ public class Plant extends AuditModel {
     boolean isMedicine; //lekartstwa
     Long medicineCycle;
     Date lastMedicine;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "garden_id", nullable = false, insertable = false, updatable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Garden garden;
     @Column(name = "garden_id")
     private Long gardenId;
+
 }

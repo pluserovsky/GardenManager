@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Data
 public class Garden extends AuditModel {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "username", nullable = false)
     private String username;

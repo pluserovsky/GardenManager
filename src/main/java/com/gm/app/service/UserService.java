@@ -62,6 +62,7 @@ public class UserService implements UserDetailsService {
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setName(user.getName());
         newUser.setEmail(user.getEmail());
+        newUser.setRole(user.getRole());
         return userRepository.save(newUser);
     }
 }

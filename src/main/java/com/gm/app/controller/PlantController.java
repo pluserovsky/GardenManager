@@ -75,6 +75,10 @@ public class PlantController {
             throw new ResourceNotFoundException("GardenId " + gardenId + " not found");
         }
         plant.setGardenId(gardenId);
+        plant.setLastMedicine(new Date());
+        plant.setLastExaggeration(new Date());
+        plant.setLastFertilization(new Date());
+        plant.setLastHydration(new Date());
         return plantRepository.save(plant);
     }
 
@@ -91,29 +95,29 @@ public class PlantController {
             plant.setDescription(plantRequest.getDescription());
             plant.setNotes(plantRequest.getNotes());
             plant.setHydrationCycle(plantRequest.getHydrationCycle());
-            plant.setLastHydration(plantRequest.getLastHydration());
+            //plant.setLastHydration(plantRequest.getLastHydration());
             //plant.setFertilized(plantRequest.isFertilized());
             plant.setFertilizationCycle(plantRequest.getFertilizationCycle());
-            plant.setLastFertilization(plantRequest.getLastFertilization());
+           // plant.setLastFertilization(plantRequest.getLastFertilization());
             //plant.setExaggerated(plantRequest.isExaggerated());
             plant.setExaggerationCycle(plantRequest.getExaggerationCycle());
-            plant.setLastExaggeration(plantRequest.getLastExaggeration());
+           // plant.setLastExaggeration(plantRequest.getLastExaggeration());
             //plant.setMedicine(plantRequest.isMedicine());
             plant.setMedicineCycle(plantRequest.getMedicineCycle());
-            plant.setLastMedicine(plantRequest.getLastMedicine());
-            if(plant.isHydrated()!=plantRequest.isHydrated() && plantRequest.isHydrated()){
+            //plant.setLastMedicine(plantRequest.getLastMedicine());
+            if(plant.isHydrated()!=plantRequest.isHydrated()){
                 plant.setHydrated(plantRequest.isHydrated());
                 plant.setLastHydration(new Date());
             }
-            if(plant.isFertilized()!=plantRequest.isFertilized() && plantRequest.isFertilized()){
+            if(plant.isFertilized()!=plantRequest.isFertilized()){
                 plant.setFertilized(plantRequest.isFertilized());
                 plant.setLastFertilization(new Date());
             }
-            if(plant.isExaggerated()!=plantRequest.isExaggerated() && plantRequest.isExaggerated()){
+            if(plant.isExaggerated()!=plantRequest.isExaggerated()){
                 plant.setExaggerated(plantRequest.isExaggerated());
                 plant.setLastExaggeration(new Date());
             }
-            if(plant.isMedicine()!=plantRequest.isMedicine() && plantRequest.isMedicine()){
+            if(plant.isMedicine()!=plantRequest.isMedicine()){
                 plant.setMedicine(plantRequest.isMedicine());
                 plant.setLastMedicine(new Date());
             }

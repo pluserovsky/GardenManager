@@ -17,7 +17,7 @@ import java.util.Date;
 @Data
 public class Reminder extends AuditModel {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private @NonNull
     String name;
