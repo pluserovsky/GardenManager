@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
   MatToolbarModule,MatIconModule, MatListModule, MatGridListModule,MatSidenavModule,
-  MatSelectModule,MatSlideToggleModule
+  MatSelectModule,MatSlideToggleModule,MatTabsModule
 } from '@angular/material';
 
 @NgModule({
@@ -19,6 +19,7 @@ import {
     MatSidenavModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatTabsModule,
     MatIconModule],
   exports: [CommonModule,
     MatToolbarModule,
@@ -32,6 +33,7 @@ import {
     MatSidenavModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatTabsModule,
     MatIconModule],
 })
 export class CustomMaterialModule { }

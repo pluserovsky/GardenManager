@@ -5,29 +5,29 @@
     </mat-card-header>
     <mat-card-content>
         <mat-form-field class="do-center">
-          <input name="name"
+          <input  name="name" minlength="3" maxlength="50"
                  matInput
                  [(ngModel)]="user.name"
                  placeholder="Imię i nazwisko" required/>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input name="email"
+          <input name="email" maxlength="50"
                  matInput
                  [(ngModel)]="user.email"
-                 placeholder="Adres e-mail" required/>
+                 placeholder="Adres e-mail" required email/>
         </mat-form-field>
       <br>
       <mat-form-field>
         <input name="username"
-               matInput
+               matInput minlength="3" maxlength="50"
                [(ngModel)]="user.username"
                placeholder="Login użytkownika" required />
       </mat-form-field>
       <br>
         <mat-form-field>
           <input name="password"
-                 matInput
+                 matInput minlength="6" maxlength="100"
                  [(ngModel)]="user.password"
                  placeholder="Hasło"
                  [type]="hide ? 'password':'text'" required/>

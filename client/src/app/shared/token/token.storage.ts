@@ -7,7 +7,7 @@ const AUTHORITIES_KEY = 'AuthAuthorities';
 
 @Injectable()
 export class TokenStorage {
-  private roles: Array<string> = [];
+  private role: string;
   constructor() { }
 
   signOut() {
@@ -38,16 +38,16 @@ export class TokenStorage {
     window.localStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
   }
 
-  public getAuthorities(): string[] {
-    this.roles = [];
+  public getAuthorities(): string {
+    this.role;
 
     if (localStorage.getItem(TOKEN_KEY)) {
-      JSON.parse(localStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
-        this.roles.push(authority.authority);
+      JSON.parse(localStorage.getItem(AUTHORITIES_KEY)).map(authority => {
+        this.role = authority.authority;
       });
     }
 
-    return this.roles;
+    return this.role;
   }
 }
 

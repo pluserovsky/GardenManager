@@ -5,7 +5,7 @@ import { PlantService } from '../shared/plant/plant.service';
 import { NgForm } from '@angular/forms';
 
 export interface Delay {
-  value: string;
+  value: number;
   viewValue: string;
 }
 
@@ -20,23 +20,25 @@ export class PlantEditComponent implements OnInit, OnDestroy {
   garden_id: number;
   plant_id: number;
   delays: Delay[] = [
-    {value: '0001-01-01T00:00:00.000+0000', viewValue: 'nie dotyczy'},
-    {value: '0001-01-01T00:01:00.000+0000', viewValue: 'co 6 godzin'},
-    {value: '0001-01-01T11:00:00.000+0000', viewValue: 'co 12 godzin'},
-    {value: '0001-01-01T23:00:00.000+0000', viewValue: 'raz na dzień'},
-    {value: '0001-01-03T00:00:00.000+0000', viewValue: 'co drugi dzień'},
-    {value: '0001-01-04T00:00:00.000+0000', viewValue: 'co trzeci raz'},
-    {value: '0001-01-05T00:00:00.000+0000', viewValue: 'co czwaty dzień'},
-    {value: '0001-01-06T00:00:00.000+0000', viewValue: 'co piąty dzień'},
-    {value: '0001-01-07T00:00:00.000+0000', viewValue: 'raz w tygodniu'},
-    {value: '0001-01-15T00:00:00.000+0000', viewValue: 'co 2 tygodnie'},
-    {value: '0001-01-22T00:00:00.000+0000', viewValue: 'co 3 tygodnie'},
-    {value: '0001-02-01T00:00:00.000+0000', viewValue: 'raz w miesiącu'},
-    {value: '0001-03-01T00:00:00.000+0000', viewValue: 'co 2 miesiące'},
-    {value: '0001-04-01T00:00:00.000+0000', viewValue: 'raz na kwartał'},
-    {value: '0001-07-01T00:00:00.000+0000', viewValue: 'raz na pół roku'},
-    {value: '0002-01-01T00:00:00.000+0000', viewValue: 'raz na rok'},
-    {value: '0003-01-01T00:00:00.000+0000', viewValue: 'co 2 lata'},
+    {value: 0, viewValue: 'nie dotyczy'},
+    {value: 21600000, viewValue: 'co 6 godzin'},
+    {value: 43200000, viewValue: 'co 12 godzin'},
+    {value: 86400000, viewValue: 'raz na dzień'},
+    {value: 172800000, viewValue: 'co drugi dzień'},
+    {value: 259200000, viewValue: 'co trzeci dzień'},
+    {value: 345600000, viewValue: 'co czwaty dzień'},
+    {value: 432000000, viewValue: 'co piąty dzień'},
+    {value: 604800000, viewValue: 'raz w tygodniu'},
+    {value: 864000000, viewValue: 'co 10 dni'},
+    {value: 1209600000, viewValue: 'co 2 tygodnie'},
+    {value: 1814400000, viewValue: 'co 3 tygodnie'},
+    {value: 2592000000, viewValue: 'raz w miesiącu'},
+    {value: 5270400000, viewValue: 'co 2 miesiące'},
+    {value: 7257600000, viewValue: 'raz na kwartał'},
+    {value: 43545600000, viewValue: 'raz na pół roku'},
+    {value: 15724800000, viewValue: 'raz na rok'},
+    {value: 62899200000, viewValue: 'co 2 lata'},
+    {value: 94348800000, viewValue: 'co 3 lata'}
   ];
 
   constructor(private route: ActivatedRoute,

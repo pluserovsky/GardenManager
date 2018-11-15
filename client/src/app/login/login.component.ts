@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
+  role: string;
   user: LoginModel = new LoginModel(null,null);
   hide = true;
   info: any;
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (this.token.getToken()) {
       this.isLoggedIn = true;
-      this.roles = this.token.getAuthorities();
+      this.role = this.token.getAuthorities();
     }
     this.info = {
       token: sessionStorage.getItem("AuthToken"),
@@ -42,9 +42,9 @@ export class LoginComponent implements OnInit {
         this.token.saveAuthorities(data.authorities);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.token.getAuthorities();
-        window.location.reload();
-        this.router.navigate(['garden-list']);
+        this.role = this.token.getAuthorities();
+
+        this.router.navigate(['/']);
       },
       error => {
         console.log(error);
