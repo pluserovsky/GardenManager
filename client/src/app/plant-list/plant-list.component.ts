@@ -16,8 +16,8 @@ export class PlantListComponent implements OnInit {
               private router: Router,
               private plantService: PlantService) { }
   displayedColumns = ['id', 'name', 'description','notes', 'createdAt','updatedAt',
-  'isHydrated','isFertilized','isExaggerated','isMedicine','edit','delete'];
-
+  'isHydrated','isFertilized','isExaggerated','isMedicine','search','edit','delete'];
+  //https://www.google.pl/search?q=
   ngOnInit() {
 
     this.sub = this.route.params.subscribe(params => {

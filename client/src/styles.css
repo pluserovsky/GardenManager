@@ -1,11 +1,12 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
-@import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~open-iconic/font/css/open-iconic-bootstrap.css';
 
 body {
   margin: 0;
   font-family: Roboto, sans-serif;
+  /*background: lightgreen url("assets/bg.jpg");*/
+
 }
 .spacer {
   flex-grow: 1;

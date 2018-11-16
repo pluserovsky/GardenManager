@@ -27,7 +27,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import {UserService} from "./shared/user/user.service";
-import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
+import { ParticlesModule } from 'angular-particle';
+import { TasksListComponent } from './tasks-list/tasks-list.component';
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     NavBarComponent,
+    TasksListComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,7 @@ const appRoutes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    DlDateTimePickerDateModule
+    ParticlesModule
   ],
   exports:[
     RouterModule,

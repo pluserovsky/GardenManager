@@ -68,7 +68,14 @@
                   <mat-cell *matCellDef="let element"> <mat-slide-toggle
                     [checked]="element.medicine "></mat-slide-toggle> </mat-cell>
                 </ng-container>
-
+                <ng-container matColumnDef="search">
+                  <mat-header-cell *matHeaderCellDef>O roślinie</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <a target="_blank" rel="noopener noreferrer" href ="https://www.google.pl/search?q={{element.name}}" type="button">
+                      <mat-icon class="open">search</mat-icon>
+                    </a>
+                  </mat-cell>
+                </ng-container>
                 <ng-container matColumnDef="edit">
                   <mat-header-cell *matHeaderCellDef>Edytuj</mat-header-cell>
                   <mat-cell *matCellDef="let element">
