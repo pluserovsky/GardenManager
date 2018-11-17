@@ -15,5 +15,6 @@ public interface GardenRepository extends JpaRepository<Garden, String>{
     List<Garden> findByUsername(String username, Pageable pageable);
     Optional<Garden> findById(Long gardenId);
     boolean existsById(Long gardenId);
+
 }
 

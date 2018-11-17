@@ -16,14 +16,14 @@
         </mat-card-header>
         <mat-card-content>
         <mat-form-field>
-          <input name="username"
+          <input name="username" autocomplete="username"
                  matInput
                  [(ngModel)]="user.username"
                  placeholder="Nazwa użtykownika" required/>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input name="password"
+          <input name="password" autocomplete="current-password"
                  matInput
                  [(ngModel)]="user.password"
                  placeholder="Hasło"

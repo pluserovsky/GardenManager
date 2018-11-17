@@ -32,7 +32,8 @@ import { TasksListComponent } from './tasks-list/tasks-list.component';
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
-  {path: 'garden-list', component: GardenListComponent, children:[]},
+  {path: 'garden-list', component: GardenListComponent },
+  {path: 'tasks-list', component: TasksListComponent },
   {path: 'plant-list/:id', component: PlantListComponent},
   {path: 'garden-add', component: GardenEditComponent},
   {path: 'garden/:gid/plant-add', component: PlantEditComponent},

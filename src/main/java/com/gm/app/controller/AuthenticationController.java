@@ -1,10 +1,10 @@
 package com.gm.app.controller;
 
+import com.gm.app.config.JwtTokenUtil;
+import com.gm.app.model.AuthToken;
 import com.gm.app.model.LoginUser;
 import com.gm.app.model.User;
 import com.gm.app.service.UserService;
-import com.gm.app.config.JwtTokenUtil;
-import com.gm.app.model.AuthToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/token")
 @CrossOrigin(origins = "http://localhost:4200")
 public class AuthenticationController {
 

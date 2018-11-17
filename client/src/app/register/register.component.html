@@ -19,14 +19,14 @@
         </mat-form-field>
       <br>
       <mat-form-field>
-        <input name="username"
+        <input name="username" autocomplete="username"
                matInput minlength="3" maxlength="50"
                [(ngModel)]="user.username"
                placeholder="Login użytkownika" required />
       </mat-form-field>
       <br>
         <mat-form-field>
-          <input name="password"
+          <input name="password" autocomplete="new-password"
                  matInput minlength="6" maxlength="100"
                  [(ngModel)]="user.password"
                  placeholder="Hasło"

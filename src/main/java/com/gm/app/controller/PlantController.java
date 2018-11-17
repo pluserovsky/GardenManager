@@ -1,8 +1,10 @@
 package com.gm.app.controller;
 
+import com.gm.app.model.Garden;
 import com.gm.app.repository.GardenRepository;
 import com.gm.app.model.Plant;
 import com.gm.app.repository.PlantRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -13,6 +15,8 @@ import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -22,7 +26,6 @@ public class PlantController {
 
     @Autowired
     private GardenRepository gardenRepository;
-
     public PlantController(PlantRepository plantRepository) {
         this.plantRepository = plantRepository;
     }
@@ -56,6 +59,19 @@ public class PlantController {
             } catch(NullPointerException e){/*System.out.println(e);*/}
         });
         return plants;
+    }
+
+    @GetMapping("/gardens/{username}/all-plants")
+    public Collection<Garden> getAllPlantsByUsername(@PathVariable (value = "username") String username,Pageable pageable) {
+        Collection<Garden> gardens = gardenRepository.findByUsername(username, pageable);
+        Collection<Plant> plants=null;
+        try {
+            for (Garden garden : gardens) {
+                plants.addAll(getAllPlantsByGardenId(garden.getId(), pageable));
+            }
+        } catch (NullPointerException e){
+            System.err.println("Plants not found.");}
+        return gardens;
     }
 
     @GetMapping("/gardens/{gardenId}/plant/{plantId}")

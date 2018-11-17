@@ -1,3 +1,68 @@
-<p>
-  tasks-list works!
-</p>
+<div>
+  <br>
+  <div >
+    <div class="container">
+      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+        <div class="blocks">
+          <button mat-raised-button color="accent" [routerLink]="['/garden-list']">
+            <mat-icon>list</mat-icon> Lista ogrodów
+          </button>
+          <button mat-raised-button color="warn" [routerLink]="['/garden/',garden_id,'plant-add']">
+            <mat-icon>add</mat-icon> Dodaj roślinę
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div >
+      <div>
+        <mat-card >
+          <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3>Rośliny w ogrodzie:</h3>
+          </mat-card-title>
+          <mat-card-content>
+            <div class="example-container mat-elevation-z8">
+              <mat-table #table [dataSource]="plants">
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="updatedAt">
+                  <mat-header-cell *matHeaderCellDef> Ostatnio modyfikowany </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.updatedAt  | date: 'd/M/y HH:mm'}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="isHydrated">
+                  <mat-header-cell *matHeaderCellDef> Nawodnienie </mat-header-cell>
+                  <mat-cell *matCellDef="let element" > <mat-slide-toggle
+                    [checked]="element.hydrated "></mat-slide-toggle>  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="isFertilized">
+                  <mat-header-cell *matHeaderCellDef> Nawożenie </mat-header-cell>
+                  <mat-cell *matCellDef="let element">  <mat-slide-toggle
+                    [checked]="element.fertilized "></mat-slide-toggle> </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="isExaggerated">
+                  <mat-header-cell *matHeaderCellDef> Przesadzanie </mat-header-cell>
+                  <mat-cell *matCellDef="let element">  <mat-slide-toggle
+                    [checked]="element.exaggerated "></mat-slide-toggle></mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="isMedicine">
+                  <mat-header-cell *matHeaderCellDef> Lekarstwa </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> <mat-slide-toggle
+                    [checked]="element.medicine "></mat-slide-toggle> </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

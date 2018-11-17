@@ -23,7 +23,6 @@ public class UserController {
         User n = new User();
         n.setName(name);
         n.setEmail(email);
-        n.setRole("USER");
         userService.save(n);
         return "Saved";
     }

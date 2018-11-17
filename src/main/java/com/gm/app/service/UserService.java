@@ -2,7 +2,6 @@ package com.gm.app.service;
 
 import com.gm.app.model.User;
 import com.gm.app.repository.UserRepository;
-import com.gm.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -62,7 +61,7 @@ public class UserService implements UserDetailsService {
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setName(user.getName());
         newUser.setEmail(user.getEmail());
-        newUser.setRole(user.getRole());
+        newUser.setRole("USER");
         return userRepository.save(newUser);
     }
 }
