@@ -6,14 +6,14 @@
         <mat-icon class="icon">input</mat-icon>
         <span class="label">Logowanie</span>
       </a>
-      <a mat-list-item [routerLink]="['/about']">
-        <mat-icon class="icon">info</mat-icon>
-        <span class="label">O programie</span>
-      </a>
+<!--        <a mat-list-item [routerLink]="['/about']">
+         <mat-icon class="icon">info</mat-icon>
+         <span class="label">O programie</span>
+       </a>-->
       <a mat-list-item [routerLink]="['/tasks-list']">
-        <mat-icon class="icon">dashboard</mat-icon>
-        <span class="label">Lista zadań</span>
-      </a>
+         <mat-icon class="icon">dashboard</mat-icon>
+         <span class="label">Lista zadań</span>
+       </a>
       <a mat-list-item [routerLink]="['/garden-list']">
         <mat-icon class="icon">dashboard</mat-icon>
         <span class="label">Menadżer ogrodów</span>
@@ -44,23 +44,23 @@
               <mat-icon class="icon" >input</mat-icon>
               <span  class="label">Logowanie</span>
             </a>
-          </li>
-          <li><a mat-list-item [routerLink]="['/tasks-list']">
-            <mat-icon class="icon">list</mat-icon>
-            <span class="label">Lista zadań</span>
-          </a></li>
-          <li>
+         </li>
+     <li><a mat-list-item [routerLink]="['/tasks-list']">
+                 <mat-icon class="icon">list</mat-icon>
+                 <span class="label">Lista zadań</span>
+               </a></li>
+               <li>
             <a [routerLink]="['/garden-list']">
               <mat-icon class="icon">dashboard</mat-icon>
               <span class="label">Menadżer ogrodów</span>
             </a>
           </li>
-          <li>
+<!--          <li>
             <a [routerLink]="['/about']">
               <mat-icon class="icon">info</mat-icon>
               <span class="label">O programie</span>
             </a>
-          </li>
+          </li>-->
           <li>
             <a (click)="logout()" *ngIf="isLoggedIn">
               <mat-icon class="icon">input</mat-icon>

@@ -2,20 +2,22 @@ package com.gm.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-
-@Data
+@Builder
+@AllArgsConstructor
+@Slf4j
+@Entity
 public class Plant extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +43,7 @@ public class Plant extends AuditModel {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Garden garden;
+    @JsonIgnore
     @Column(name = "garden_id")
     private Long gardenId;
 

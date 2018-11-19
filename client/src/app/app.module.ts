@@ -57,7 +57,7 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     NavBarComponent,
-    TasksListComponent,
+   TasksListComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlantService } from '../shared/plant/plant.service';
 import {Subscription} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-plant-list',
@@ -17,7 +18,7 @@ export class PlantListComponent implements OnInit {
               private plantService: PlantService) { }
   displayedColumns = ['id', 'name', 'description','notes', 'createdAt','updatedAt',
   'isHydrated','isFertilized','isExaggerated','isMedicine','search','edit','delete'];
-  //https://www.google.pl/search?q=
+  dataSource;
   ngOnInit() {
 
     this.sub = this.route.params.subscribe(params => {
@@ -25,7 +26,9 @@ export class PlantListComponent implements OnInit {
       this.garden_id = params['id'];
       this.plantService.getAll(id).subscribe(data => {
         this.plants = data;
+        this.dataSource = new MatTableDataSource(this.plants);
       });
+
     });
   }
   remove(plant_id) {

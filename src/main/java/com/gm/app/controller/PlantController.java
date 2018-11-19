@@ -61,19 +61,6 @@ public class PlantController {
         return plants;
     }
 
-    @GetMapping("/gardens/{username}/all-plants")
-    public Collection<Garden> getAllPlantsByUsername(@PathVariable (value = "username") String username,Pageable pageable) {
-        Collection<Garden> gardens = gardenRepository.findByUsername(username, pageable);
-        Collection<Plant> plants=null;
-        try {
-            for (Garden garden : gardens) {
-                plants.addAll(getAllPlantsByGardenId(garden.getId(), pageable));
-            }
-        } catch (NullPointerException e){
-            System.err.println("Plants not found.");}
-        return gardens;
-    }
-
     @GetMapping("/gardens/{gardenId}/plant/{plantId}")
     public Plant getPlantById(@PathVariable Long gardenId,@PathVariable Long plantId) {
         if(!gardenRepository.existsById(gardenId)) {

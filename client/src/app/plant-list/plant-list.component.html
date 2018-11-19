@@ -23,7 +23,7 @@
           </mat-card-title>
           <mat-card-content>
             <div class="example-container mat-elevation-z8">
-              <mat-table #table [dataSource]="plants">
+              <mat-table #table [dataSource]="dataSource">
                 <ng-container matColumnDef="id">
                   <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
                   <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
@@ -50,23 +50,23 @@
                 </ng-container>
                 <ng-container matColumnDef="isHydrated">
                   <mat-header-cell *matHeaderCellDef> Nawodnienie </mat-header-cell>
-                  <mat-cell *matCellDef="let element" > <mat-slide-toggle
-                    [checked]="element.hydrated "></mat-slide-toggle>  </mat-cell>
+                  <mat-cell *matCellDef="let element" >
+                    <mat-icon>{{element.hydrated ? 'done' : 'clear'}}</mat-icon></mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="isFertilized">
                   <mat-header-cell *matHeaderCellDef> Nawożenie </mat-header-cell>
-                  <mat-cell *matCellDef="let element">  <mat-slide-toggle
-                    [checked]="element.fertilized "></mat-slide-toggle> </mat-cell>
+                  <mat-cell *matCellDef="let element">
+                    <mat-icon>{{element.fertilized ? 'done' : 'clear'}}</mat-icon></mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="isExaggerated">
                   <mat-header-cell *matHeaderCellDef> Przesadzanie </mat-header-cell>
-                  <mat-cell *matCellDef="let element">  <mat-slide-toggle
-                    [checked]="element.exaggerated "></mat-slide-toggle></mat-cell>
+                  <mat-cell *matCellDef="let element">
+                    <mat-icon>{{element.exaggerated ? 'done' : 'clear'}}</mat-icon></mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="isMedicine">
                   <mat-header-cell *matHeaderCellDef> Lekarstwa </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> <mat-slide-toggle
-                    [checked]="element.medicine "></mat-slide-toggle> </mat-cell>
+                  <mat-cell *matCellDef="let element">
+                    <mat-icon>{{element.medicine ? 'done' : 'clear'}}</mat-icon></mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="search">
                   <mat-header-cell *matHeaderCellDef>O roślinie</mat-header-cell>

@@ -9,9 +9,6 @@ export class PlantService {
 	getAll(gid: string ): Observable<any> {
     return this.http.get(this.API + gid+ '/plants');
   }
-  getAllPlants(username: string): Observable<any> {
-    return this.http.get(this.API + username+ '/all-plants');
-  }
   get(gid: number, pid: number) {
     return this.http.get(this.API+gid+'/plant/' +pid);
   }
@@ -24,9 +21,6 @@ export class PlantService {
     }
     return result;
   }
-/*  update(gid: number ): Observable<any> {
-    return this.http.put(this.API + gid+ '/update-work');
-  }*/
 
   remove(gid: number, pid: number) {
     return this.http.delete(this.API+ gid+"/plant/"+pid);
