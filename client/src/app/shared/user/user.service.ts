@@ -16,6 +16,9 @@ export class UserService {
       result = this.http.post('//localhost:8080/register', user);
     return result;
   }
+  confirm(token: String){
+    return this.http.post('//localhost:8080/register', token );
+  }
 
   remove(href: string) {
     return this.http.delete(href);

@@ -62,6 +62,16 @@ public class UserService implements UserDetailsService {
         newUser.setName(user.getName());
         newUser.setEmail(user.getEmail());
         newUser.setRole("USER");
+        newUser.setConfirmationToken(user.getConfirmationToken());
+        newUser.setEnabled(user.isEnabled());
         return userRepository.save(newUser);
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public User findByConfirmationToken(String confirmationToken) {
+        return userRepository.findByConfirmationToken(confirmationToken);
     }
 }

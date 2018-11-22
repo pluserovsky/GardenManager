@@ -2,18 +2,28 @@ package com.gm.app.controller;
 
 
 import com.gm.app.model.User;
+import com.gm.app.service.EmailService;
 import com.gm.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping(path="/add-user") // Map ONLY GET Requests
     public @ResponseBody String addNewUser (@RequestParam String name
@@ -44,6 +54,41 @@ public class UserController {
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public User saveUser(@RequestBody User user){
-        return userService.save(user);
+        User userExists = userService.findByEmail(user.getEmail());
+        if (userExists != null) {
+        }
+        user.setEnabled(false);
+
+        // Generate random 36-character string token for confirmation link
+        user.setConfirmationToken(UUID.randomUUID().toString());
+
+        userService.save(user);
+
+        //String appUrl = request.getScheme() + "://" + request.getServerName();
+
+        SimpleMailMessage registrationEmail = new SimpleMailMessage();
+        registrationEmail.setTo(user.getEmail());
+        registrationEmail.setSubject("Registration Confirmation");
+        registrationEmail.setText("To confirm your e-mail address, please click the link below:\n"
+                 + "localhost:4200/confirm/" + user.getConfirmationToken());
+        registrationEmail.setFrom("lukasz.broll@wp.pl");
+
+        emailService.sendEmail(registrationEmail);
+        return user;
     }
+
+    @RequestMapping(value="/confirm/{token}", method = RequestMethod.POST)
+    public User processConfirmationForm(@PathVariable(value = "token") String token) {
+
+        // Find the user associated with the reset token
+        User user = userService.findByConfirmationToken(token);
+
+        // Set user to enabled
+        user.setEnabled(true);
+
+        // Save user
+       return userService.save(user);
+
+    }
+
 }

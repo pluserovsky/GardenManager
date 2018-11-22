@@ -19,7 +19,11 @@ export class LoginComponent implements OnInit {
   user: LoginModel = new LoginModel(null,null);
   hide = true;
   info: any;
-  constructor(private formBuilder: FormBuilder, private router: Router, public dialog: MatDialog, private authService: AuthService, private token: TokenStorage) { }
+  constructor(private formBuilder: FormBuilder,
+              private router: Router,
+              public dialog: MatDialog,
+              private authService: AuthService,
+              private token: TokenStorage) { }
 
   ngOnInit() {
     if (this.token.getToken()) {

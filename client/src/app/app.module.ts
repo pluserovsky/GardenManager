@@ -29,6 +29,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import {UserService} from "./shared/user/user.service";
 import { ParticlesModule } from 'angular-particle';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
+import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
   {path: 'garden/:gid/plant-edit/:pid', component: PlantEditComponent},
   {path: 'garden-edit/:id', component: GardenEditComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'confirm/:token', component: ConfirmRegistrationComponent},
   {path: 'login', component: LoginComponent},
 
 ];
@@ -58,6 +60,7 @@ const appRoutes: Routes = [
     RegisterComponent,
     NavBarComponent,
    TasksListComponent,
+   ConfirmRegistrationComponent,
   ],
   imports: [
     BrowserModule,

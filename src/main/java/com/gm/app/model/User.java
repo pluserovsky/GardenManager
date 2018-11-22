@@ -34,4 +34,6 @@ public class User {
     @Size(min=6, max = 100)
     private String password;
     private String role;
+    private boolean enabled;
+    private String confirmationToken;
 }
