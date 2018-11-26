@@ -1,0 +1,23 @@
+
+  <div style="text-align:center">
+  <h1>
+     {{title}}
+  </h1>
+  <div class="chat-container">
+    <div class="chat">
+      <div class="message"></div>
+    </div>
+  </div>
+
+
+<div class="footer">
+  <div class="send-button">
+    <input  id="input" type="text" #input>
+    <button mat-button (click)="sendMessage(input.value)" class="divider">Wyślij</button>
+    </div>
+
+
+  </div>
+  </div>
+
+

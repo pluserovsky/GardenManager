@@ -14,7 +14,6 @@ export class UserService {
   save(user: any): Observable<any> {
     let result: Observable<Object>;
       result = this.http.post('//localhost:8080/register', user);
-      console.log(result);
     return result;
   }
 

@@ -33,7 +33,6 @@ public class ScheduleTasksController {
 
     @Scheduled(fixedRate = 21600000) //6h
     public void scheduleFixedRateTask() {
-
         List<Garden> gardens = gardenRepository.findAll();
         List<String> jobGardens = new ArrayList<>();
         Set<String> owners = new HashSet<>();
@@ -46,24 +45,13 @@ public class ScheduleTasksController {
             SimpleMailMessage toDoListEmail = new SimpleMailMessage();
             toDoListEmail.setTo(owner);
             toDoListEmail.setSubject("Przypomnienie o pracy w ogrodzie");
-            toDoListEmail.setText("W następujących ogrodach masz oczekujące zadania:\n"
+            toDoListEmail.setText("Cześć!\nW następujących ogrodach masz oczekujące zadania do wykonania:\n"
                     + jobGardens.toString()+
-                    "Zadbaj o rośliny i nie zapomnij zaktualizować statusu w aplikacji!");
+                    "\nZadbaj o rośliny i nie zapomnij zaktualizować statusu w aplikacji!");
             toDoListEmail.setFrom("lukasz@broll.pl");
 
             emailService.sendEmail(toDoListEmail);
         });
-/*             if(jobGardens.size()>0) {
-                SimpleMailMessage toDoListEmail = new SimpleMailMessage();
-                toDoListEmail.setTo(userService.findOne(garden.getUsername()).getEmail());
-                toDoListEmail.setSubject("Przypomnienie o pracy w ogrodzie");
-                toDoListEmail.setText("W następujących ogrodach masz oczekujące zadania:\n"
-                        + jobGardens.toString());
-                toDoListEmail.setFrom("lukasz@broll.pl");
-
-                emailService.sendEmail(toDoListEmail);
-            }*/
-
     }
 
     public boolean pendingJobs(Garden garden){
@@ -76,7 +64,6 @@ public class ScheduleTasksController {
             else if(!plant.isFertilized() && plant.getFertilizationCycle()!=0) isJob.set(true);
 
         });
-
         return isJob.get();
     }
 }

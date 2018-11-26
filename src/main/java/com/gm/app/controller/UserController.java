@@ -24,7 +24,7 @@ public class UserController {
     private UserService userService;
     @Autowired
     private EmailService emailService;
-
+    String serverUrl = "http://localhost:4200/";
     @GetMapping(path="/add-user") // Map ONLY GET Requests
     public @ResponseBody String addNewUser (@RequestParam String name
             , @RequestParam String email) {
@@ -54,39 +54,29 @@ public class UserController {
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public User saveUser(@RequestBody User user){
-        User userExists = userService.findByEmail(user.getEmail());
-        if (userExists != null) {
-        }
+
         user.setEnabled(false);
-
-        // Generate random 36-character string token for confirmation link
         user.setConfirmationToken(UUID.randomUUID().toString());
-
         userService.save(user);
-
-        //String appUrl = request.getScheme() + "://" + request.getServerName();
-
         SimpleMailMessage registrationEmail = new SimpleMailMessage();
         registrationEmail.setTo(user.getEmail());
         registrationEmail.setSubject("Potwierdzenie rejestracji w Menadżerze Ogrodu");
-        registrationEmail.setText("Przejdź do adresu poniżej, aby aktywować konto:\n"
-                 + "http://localhost:4200/confirm/" + user.getConfirmationToken());
+        registrationEmail.setText("Cześć "+ user.getName()+
+                "!\n\nPrzejdź do adresu poniżej, aby aktywować konto:\n"
+                 + serverUrl +"confirm/"+ user.getConfirmationToken()+
+                "\n\nTwoja nazwa użytkownika to: "+ user.getUsername()+
+                "\n\nZapraszamy!");
         registrationEmail.setFrom("lukasz@broll.pl");
 
         emailService.sendEmail(registrationEmail);
         return user;
     }
+
     @GetMapping("/confirm-acc/{code}")
     public User processConfirmationForm(@PathVariable(value = "code") String code) {
-
-        // Find the user associated with the reset token
         User user = userService.findByConfirmationToken(code);
-        //System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + user.getUsername());
-        // Set user to enabled
         user.setEnabled(true);
-        // Save user
        return userService.save(user);
-
     }
 
 

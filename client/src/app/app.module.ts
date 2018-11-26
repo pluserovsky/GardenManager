@@ -17,6 +17,7 @@ import {PlantListComponent} from './plant-list/plant-list.component';
 import {GardenListComponent} from './garden-list/garden-list.component';
 import {GardenEditComponent} from './garden-edit/garden-edit.component';
 import {HomeComponent} from './home/home.component';
+import {ChatComponent} from './chat/chat.component';
 import {AboutComponent} from './about/about.component';
 import {Interceptor} from "./app.interceptor";
 import {AuthService} from "./shared/auth/auth.service";
@@ -43,7 +44,7 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'confirm/:code', component: ConfirmRegistrationComponent},
   {path: 'login', component: LoginComponent},
-
+  {path: 'chat', component: ChatComponent},
 ];
 
 @NgModule({
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     GardenListComponent,
     GardenEditComponent,
     HomeComponent,
+    ChatComponent,
     AboutComponent,
     ErrorDialogComponent,
     LoginComponent,
@@ -61,6 +63,7 @@ const appRoutes: Routes = [
     NavBarComponent,
    TasksListComponent,
    ConfirmRegistrationComponent,
+
   ],
   imports: [
     BrowserModule,
