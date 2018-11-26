@@ -41,7 +41,7 @@ const appRoutes: Routes = [
   {path: 'garden/:gid/plant-edit/:pid', component: PlantEditComponent},
   {path: 'garden-edit/:id', component: GardenEditComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'confirm/:token', component: ConfirmRegistrationComponent},
+  {path: 'confirm/:code', component: ConfirmRegistrationComponent},
   {path: 'login', component: LoginComponent},
 
 ];
@@ -81,7 +81,12 @@ const appRoutes: Routes = [
     CommonModule
   ],
  entryComponents: [ErrorDialogComponent],
-  providers: [ErrorDialogComponent, PlantService, GardenService, AuthService, TokenStorage, UserService,
+  providers: [ErrorDialogComponent,
+    PlantService,
+    GardenService,
+    AuthService,
+    TokenStorage,
+    UserService,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true}

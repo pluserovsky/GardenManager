@@ -11,5 +11,5 @@ import java.util.List;
 @RepositoryRestResource
 @CrossOrigin(origins = "http://localhost:4200")
 public interface PlantRepository extends JpaRepository<Plant, Long>{
-    List<Plant> findByGardenId(Long gardenId, Pageable pageable);
+    List<Plant> findByGardenId(Long gardenId);
 }

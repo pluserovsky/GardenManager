@@ -31,29 +31,29 @@ public class PlantController {
     }
 
     @GetMapping("/gardens/{gardenId}/plants")
-    public Collection<Plant> getAllPlantsByGardenId(@PathVariable (value = "gardenId") Long gardenId, Pageable pageable) {
-        Collection<Plant> plants = plantRepository.findByGardenId(gardenId, pageable);
+    public Collection<Plant> getAllPlantsByGardenId(@PathVariable (value = "gardenId") Long gardenId) {
+        Collection<Plant> plants = plantRepository.findByGardenId(gardenId);
         Date curr = new Date();
         plants.forEach((plant) -> {
             try {
                 if (plant.getLastHydration().getTime() + plant.getHydrationCycle() - curr.getTime() <0 && plant.isHydrated()){
                     plant.setHydrated(false);
-                    plant.setLastHydration(curr);
+//                    plant.setLastHydration(curr);
                     plantRepository.save(plant);
                 }
                 if (plant.getLastFertilization().getTime() + plant.getFertilizationCycle() - curr.getTime() <0 && plant.isFertilized()){
                     plant.setFertilized(false);
-                    plant.setLastFertilization(curr);
+//                    plant.setLastFertilization(curr);
                     plantRepository.save(plant);
                 }
                 if (plant.getLastExaggeration().getTime() + plant.getExaggerationCycle() - curr.getTime() <0 && plant.isExaggerated()){
                     plant.setExaggerated(false);
-                    plant.setLastExaggeration(curr);
+//                    plant.setLastExaggeration(curr);
                     plantRepository.save(plant);
                 }
                 if (plant.getLastMedicine().getTime() + plant.getMedicineCycle() - curr.getTime() <0 && plant.isMedicine()){
                     plant.setMedicine(false);
-                    plant.setLastMedicine(curr);
+//                    plant.setLastMedicine(curr);
                     plantRepository.save(plant);
                 }
             } catch(NullPointerException e){/*System.out.println(e);*/}
@@ -128,7 +128,7 @@ public class PlantController {
         }).orElseThrow(() -> new ResourceNotFoundException("PlantId " + plantId + "not found"));
     }
 
-    @DeleteMapping("/gardens/{gardenId}/plant/{plantId}")
+    @DeleteMapping("/gardens/{gardenId}/delete-plant/{plantId}")
     public ResponseEntity<?> deletePlant(@PathVariable (value = "gardenId") Long gardenId,
                                          @PathVariable (value = "plantId") Long plantId) {
         if(!gardenRepository.existsById(gardenId)) {
@@ -157,4 +157,6 @@ public class PlantController {
         });
         return plants;
     }*/
+
+
 }

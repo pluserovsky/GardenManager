@@ -68,27 +68,26 @@ public class UserController {
 
         SimpleMailMessage registrationEmail = new SimpleMailMessage();
         registrationEmail.setTo(user.getEmail());
-        registrationEmail.setSubject("Registration Confirmation");
-        registrationEmail.setText("To confirm your e-mail address, please click the link below:\n"
-                 + "localhost:4200/confirm/" + user.getConfirmationToken());
-        registrationEmail.setFrom("lukasz.broll@wp.pl");
+        registrationEmail.setSubject("Potwierdzenie rejestracji w Menadżerze Ogrodu");
+        registrationEmail.setText("Przejdź do adresu poniżej, aby aktywować konto:\n"
+                 + "http://localhost:4200/confirm/" + user.getConfirmationToken());
+        registrationEmail.setFrom("lukasz@broll.pl");
 
         emailService.sendEmail(registrationEmail);
         return user;
     }
-
-    @RequestMapping(value="/confirm/{token}", method = RequestMethod.POST)
-    public User processConfirmationForm(@PathVariable(value = "token") String token) {
+    @GetMapping("/confirm-acc/{code}")
+    public User processConfirmationForm(@PathVariable(value = "code") String code) {
 
         // Find the user associated with the reset token
-        User user = userService.findByConfirmationToken(token);
-
+        User user = userService.findByConfirmationToken(code);
+        //System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + user.getUsername());
         // Set user to enabled
         user.setEnabled(true);
-
         // Save user
        return userService.save(user);
 
     }
+
 
 }

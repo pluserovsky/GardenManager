@@ -39,9 +39,10 @@
     </mat-card-content>
     <mat-card-actions>
         <button mat-button type="submit"
-                class="mat-raised-button mat-primary"
+                class="mat-raised-button mat-warn"
                 [disabled]="!registerForm.valid">Zarejestruj</button>
-        <button mat-button routerLink="/login" class="divider">Zaloguj</button>
+
+
       </mat-card-actions>
       <mat-card-footer>
         <!--<div class="giphy">
@@ -50,4 +51,6 @@
         </div>-->
       </mat-card-footer>
   </form>
+  <button mat-button routerLink="/login" class="divider">Zaloguj</button>
+
 </mat-card>

@@ -22,7 +22,10 @@ export class GardenService {
     }
     return result;
   }
-
+  confirm(token: string) {
+    console.log("//localhost:8080/confirm-acc/"+token );
+    return this.http.get("//localhost:8080/confirm-acc/"+token);
+  }
 
   remove(id: string,username: string) {
     return this.http.delete(this.API + username + '/delete-garden/'+ id);

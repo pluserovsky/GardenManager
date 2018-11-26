@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TokenStorage} from "../shared/token/token.storage";
+import {ActivatedRoute} from "@angular/router";
+import {PlantService} from "../shared/plant/plant.service";
 
 
 @Component({
@@ -9,6 +11,7 @@ import {TokenStorage} from "../shared/token/token.storage";
 })
 export class HomeComponent implements OnInit {
   info: any;
+  code: string;
   constructor(private token: TokenStorage) {
   }
 
@@ -18,9 +21,12 @@ export class HomeComponent implements OnInit {
       username:  sessionStorage.getItem("AuthUsername"),
       authorities: sessionStorage.getItem("AuthAuthorities"),
     };
+    this.code ="637a42b8-0c5e-4c2a-b9ff-02b08f45b895";// this.route.params['code'];
   }
   logout() {
     sessionStorage.clear();
     window.location.reload();
   }
+
+
 }

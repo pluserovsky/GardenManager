@@ -23,6 +23,6 @@ export class PlantService {
   }
 
   remove(gid: number, pid: number) {
-    return this.http.delete(this.API+ gid+"/plant/"+pid);
+    return this.http.delete(this.API+ gid+"/delete-plant/"+pid);
   }
 }

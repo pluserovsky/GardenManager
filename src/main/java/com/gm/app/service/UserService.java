@@ -57,11 +57,12 @@ public class UserService implements UserDetailsService {
 
     public User save(User user) {
         User newUser = new User();
+        if(user.getId()!=null) newUser.setId(user.getId());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setName(user.getName());
         newUser.setEmail(user.getEmail());
-        newUser.setRole("USER");
+        newUser.setRole("ROLE_USER");
         newUser.setConfirmationToken(user.getConfirmationToken());
         newUser.setEnabled(user.isEnabled());
         return userRepository.save(newUser);

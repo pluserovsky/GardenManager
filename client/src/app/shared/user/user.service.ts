@@ -14,10 +14,12 @@ export class UserService {
   save(user: any): Observable<any> {
     let result: Observable<Object>;
       result = this.http.post('//localhost:8080/register', user);
+      console.log(result);
     return result;
   }
-  confirm(token: String){
-    return this.http.post('//localhost:8080/register', token );
+
+  confirm(code: string) {
+    return this.http.get(this.API +'/confirm-acc/'+code);
   }
 
   remove(href: string) {

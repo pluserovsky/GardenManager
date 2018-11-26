@@ -32,7 +32,10 @@ public class GardenController {
     }*/
     @GetMapping("/{username}/gardens")
     public List<Garden> getAllGardensByUsername(@PathVariable (value = "username") String username, Pageable pageable) {
+        if(checkActivation(username))
         return gardenRepository.findByUsername(username, pageable);
+        else
+        return null;
     }
     @GetMapping("/{username}/get-garden/{gardenId}")
     public Garden getGardenById(@PathVariable (value = "username") String username,@PathVariable Long gardenId) {
@@ -45,8 +48,11 @@ public class GardenController {
 
     @PostMapping("/{username}/add-gardens")
     public Garden createGarden(@Valid @RequestBody Garden garden, @PathVariable (value = "username") String username) {
+        if(checkActivation(username)){
         garden.setUsername(username);
         return gardenRepository.save(garden);
+        } else
+            return null;
     }
 
     @PutMapping("/{username}/update-garden/{gardenId}")
@@ -68,5 +74,9 @@ public class GardenController {
         }).orElseThrow(() -> new ResourceNotFoundException("GardenId " + gardenId + " not found"));
     }
 
+    public boolean checkActivation( String username)
+    {
+        return userRepository.findByUsername(username).isEnabled();
+    }
 
 }

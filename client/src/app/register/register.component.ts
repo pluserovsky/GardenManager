@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import{RegisterModel} from "../models/register.model";
 import {FormGroup, FormBuilder, Validators, NgForm} from "@angular/forms";
 import {UserService} from "../shared/user/user.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-register',
@@ -13,18 +14,22 @@ export class RegisterComponent implements OnInit {
   user: RegisterModel = new RegisterModel();
   registerForm: NgForm;
   hide = true;
-
+  token: string;
+  sub: Subscription;
   constructor(private formBuilder: FormBuilder,
               private router: Router,
+              private route: ActivatedRoute,
               private userService: UserService) { }
 
   ngOnInit() {
 
   }
 
-  onRegisterSubmit() {
-    this.save(this.registerForm);
-    console.log(this.user.name + ' ' + this.user.email + ' ' + this.user.password);
+  confirm() {
+    this.sub = this.route.params.subscribe(params => {
+      this.token = params['token'];
+      this.userService.get(this.token);
+    });
   }
   gotoLogin() {
     this.router.navigate(['/login']);
