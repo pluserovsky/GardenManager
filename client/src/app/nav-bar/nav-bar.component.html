@@ -6,15 +6,22 @@
         <mat-icon class="icon">input</mat-icon>
         <span class="label">Logowanie</span>
       </a>
-<!--        <a mat-list-item [routerLink]="['/about']">
+        <a mat-list-item
+           routerLink="/chat" *ngIf="isLoggedIn">
+          <mat-icon class="icon">chat</mat-icon>
+          <span class="label">Czat</span>
+        </a>
+       <a mat-list-item [routerLink]="['/about']">
          <mat-icon class="icon">info</mat-icon>
          <span class="label">O programie</span>
        </a>-->
-      <a mat-list-item [routerLink]="['/tasks-list']">
+      <a mat-list-item
+         [routerLink]="['/tasks-list']" *ngIf="isLoggedIn">
          <mat-icon class="icon">dashboard</mat-icon>
          <span class="label">Lista zadań</span>
        </a>
-      <a mat-list-item [routerLink]="['/garden-list']">
+      <a mat-list-item
+         [routerLink]="['/garden-list']" *ngIf="isLoggedIn">
         <mat-icon class="icon">dashboard</mat-icon>
         <span class="label">Menadżer ogrodów</span>
       </a>
@@ -45,12 +52,19 @@
               <span  class="label">Logowanie</span>
             </a>
          </li>
-     <li><a mat-list-item [routerLink]="['/tasks-list']">
+          <li>
+            <a routerLink="/chat" *ngIf="isLoggedIn">
+              <mat-icon class="icon" >chat</mat-icon>
+              <span  class="label">&nbsp;Czat</span>
+            </a>
+          </li>
+          <li>
+       <a [routerLink]="['/tasks-list']" *ngIf="isLoggedIn">
                  <mat-icon class="icon">list</mat-icon>
                  <span class="label">Lista zadań</span>
                </a></li>
                <li>
-            <a [routerLink]="['/garden-list']">
+            <a [routerLink]="['/garden-list']" *ngIf="isLoggedIn">
               <mat-icon class="icon">dashboard</mat-icon>
               <span class="label">Menadżer ogrodów</span>
             </a>
@@ -64,7 +78,7 @@
           <li>
             <a (click)="logout()" *ngIf="isLoggedIn">
               <mat-icon class="icon">input</mat-icon>
-              <span class="label"> Wyloguj</span>
+              <span class="label">&nbsp;Wyloguj</span>
             </a>
           </li>
         </ul>

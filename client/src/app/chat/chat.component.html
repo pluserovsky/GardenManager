@@ -1,7 +1,6 @@
-
-  <div style="text-align:center">
+<div style="text-align:center">
   <h1>
-     {{title}}
+    {{title}}
   </h1>
   <div class="chat-container">
     <div class="chat">
@@ -9,15 +8,20 @@
     </div>
   </div>
 
+  <div class="footer">
+    <div class="send-button">
+      <mat-form-field  color="warn">
+        <input   matInput id="input"
+               placeholder="Wiadomość" #input autocomplete="off">
+      </mat-form-field>
+      <button mat-button class="chat-button"
+              (click)="sendMessage(input.value)" >Wyślij</button>
+      <!--<input  id="input" type="text" #input>-->
 
-<div class="footer">
-  <div class="send-button">
-    <input  id="input" type="text" #input>
-    <button mat-button (click)="sendMessage(input.value)" class="divider">Wyślij</button>
     </div>
 
+  </div>
 
-  </div>
-  </div>
+</div>
 
 

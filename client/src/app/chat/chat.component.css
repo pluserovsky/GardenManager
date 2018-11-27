@@ -1,7 +1,7 @@
 .chat-container{
   height: 80vh;
   width: 100vw;
-  background: #ffffff;
+
 }
 .chat{
   text-align: left;
@@ -9,6 +9,7 @@
   width: 50%;
   height: 100%;
   border: 1px solid grey;
+  background: white;
 }
 
 .footer{
@@ -22,19 +23,26 @@
   margin: 0 auto;
   height: 70%;
   width: 50%;
+  background: gainsboro;
 }
 input{
   float: right;
   height: 30px;
   border-radius: 15px;
-  font-size: 1.5em;
+  font-size: 1.0em;
 }
 .send{
   float: right;
   background-size: contain;
-  background: url("../../assets/send.png") no-repeat;
   height: 30px;
   width: 30px;
   margin-left: 5px;
+
+}
+.example-full-width {
+   width: 100%;
+ }
+
+.chat-button{
 
 }
