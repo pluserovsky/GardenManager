@@ -3,6 +3,9 @@
   <div class="container">
     <div class="container">
       <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+        <div *ngIf="isLoginFailed">
+          <h3 class="do-center">Aktywuj konto, aby uzysakć pełby dostęp do aplikacji!</h3>
+        </div>
         <div class="blocks">
           <button mat-raised-button color="warn" [routerLink]="['/garden-add']">
             <mat-icon>add</mat-icon> Dodaj ogród

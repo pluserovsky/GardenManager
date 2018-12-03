@@ -17,19 +17,26 @@ export class TasksListComponent implements OnInit {
   sub: Subscription;
   garden_id: number;
   dataSource;
+  isLoginFailed = false;
+  errorMessage = '';
   constructor(private route: ActivatedRoute,
               private router: Router,
               private plantService: PlantService,
               private gardenService: GardenService) { }
   displayedColumns = ['id', 'name', 'updatedAt','isHydrated','isFertilized','isExaggerated','isMedicine','open'];
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      const username = sessionStorage.getItem("AuthUsername");
-      this.gardenService.getAll(username).subscribe(data => {
-        this.gardens = data;
-
+    if (sessionStorage.getItem("AuthToken")) {
+      this.sub = this.route.params.subscribe(params => {
+        const username = sessionStorage.getItem("AuthUsername");
+        this.gardenService.getAll(username).subscribe(data => {
+          this.gardens = data;
+        }, error => {
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.isLoginFailed = true;
+        });
       });
-    });
+    } else this.router.navigate(['/login']);
   }
   remove(plant_id) {
     this.plantService.remove(this.garden_id, plant_id).subscribe(result => {

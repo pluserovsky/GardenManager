@@ -5,7 +5,7 @@
     </mat-card-header>
     <mat-card-content>
       <mat-tab-group color = 'warn'>
-        <mat-tab label="O roslinie"><br>
+        <mat-tab label="O roślinie"><br>
       <input type="hidden" name="href" [(ngModel)]="plant.href">
       <mat-form-field>
         <input matInput placeholder="Nazwa" [(ngModel)]="plant.name" required name="name" #name>
@@ -19,28 +19,28 @@
         </mat-tab>
         <mat-tab label="Cykle"><br>
       <mat-form-field>
-        <mat-select placeholder="Cykl podlewania" name="hydrationCycle"  [(ngModel)]="plant.hydrationCycle">
+        <mat-select placeholder="Cykl podlewania" name="hydrationCycle"  [(ngModel)]="plant.hydrationCycle" required>
           <mat-option *ngFor="let delay of delays" [value]="delay.value">
             {{delay.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field><br>
       <mat-form-field>
-        <mat-select placeholder="Cykl nawożenia" name="fertilizationCycle" [(ngModel)]="plant.fertilizationCycle">
+        <mat-select placeholder="Cykl nawożenia" name="fertilizationCycle" [(ngModel)]="plant.fertilizationCycle" required>
           <mat-option *ngFor="let delay of delays" [value]="delay.value">
             {{delay.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field><br>
       <mat-form-field>
-        <mat-select placeholder="Cykl przesadzania"  name="exaggerationCycle" [(ngModel)]="plant.exaggerationCycle">
+        <mat-select placeholder="Cykl przesadzania"  name="exaggerationCycle" [(ngModel)]="plant.exaggerationCycle" required>
           <mat-option *ngFor="let delay of delays" [value]="delay.value">
             {{delay.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field><br>
       <mat-form-field>
-        <mat-select placeholder="Cykl podawania lekarstwa"  name="medicineCycle" [(ngModel)]="plant.medicineCycle">
+        <mat-select placeholder="Cykl podawania lekarstwa"  name="medicineCycle" [(ngModel)]="plant.medicineCycle" required>
           <mat-option *ngFor="let delay of delays" [value]="delay.value" >
             {{delay.viewValue}}
           </mat-option>
@@ -66,9 +66,9 @@
         </mat-tab-group>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit"
+      <button mat-raised-button color="warn" type="submit"
               [disabled]="!plantForm.form.valid">Zapisz</button>
-      <button mat-raised-button color="secondary" (click)="remove(plant.href)"
+      <button mat-raised-button color="warn" (click)="remove(plant.href)"
               *ngIf="plant.href" type="button">Usuń</button>
       <a mat-button [routerLink]="['/plant-list/',this.garden_id]">Anuluj</a>
     </mat-card-actions>

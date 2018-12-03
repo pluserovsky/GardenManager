@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService {
     }
 
     private List<SimpleGrantedAuthority> getAuthority() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     public List<User> findAll() {
@@ -62,9 +62,9 @@ public class UserService implements UserDetailsService {
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setName(user.getName());
         newUser.setEmail(user.getEmail());
-        newUser.setRole("ROLE_USER");
+        newUser.setRole("USER");
         newUser.setConfirmationToken(user.getConfirmationToken());
-        newUser.setEnabled(user.isEnabled());
+        newUser.setActive(user.isActive());
         return userRepository.save(newUser);
     }
 

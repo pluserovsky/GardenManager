@@ -139,24 +139,7 @@ public class PlantController {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("PlantId " + plantId + " not found"));
     }
-  /*  @PutMapping("/gardens/{gardenId}/update-work")
-    public Collection<Plant> updateWorks(@PathVariable (value = "gardenId") Long gardenId, Pageable pageable) {
-        Collection<Plant> plants = plantRepository.findByGardenId(gardenId, pageable);
-        Date curr = new Date();
-        final Long[] diff = new Long[1];
-        plants.forEach((plant) -> {
-            try {
-                diff[0] = plant.getLastHydration().getTime() + 200000;
-                //System.out.println(diff[0] );
-                System.out.print(plant.getName() );
-                System.out.println(diff[0]-curr.getTime() );
-                if (plant.getLastHydration().getTime() + 200000 - curr.getTime() <0 && plant.isHydrated()){
-                    plant.setHydrated(false);
-                    plant.setLastHydration(curr);}
-            } catch(NullPointerException e){*//*System.out.println(e);*//*}
-        });
-        return plants;
-    }*/
+
 
 
 }

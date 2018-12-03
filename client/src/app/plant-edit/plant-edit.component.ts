@@ -15,7 +15,7 @@ export interface Delay {
   templateUrl: './plant-edit.component.html',
   styleUrls: ['./plant-edit.component.css']
 })
-export class PlantEditComponent implements OnInit, OnDestroy {
+export class PlantEditComponent implements OnInit {
   plant: any = {};
   sub: Subscription;
   garden_id: number;
@@ -48,25 +48,27 @@ export class PlantEditComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.plant_id = +params['pid'];
-      this.garden_id = +params['gid'];
-      if (this.plant_id) { //sessionStorage.getItem("AuthUsername")
-        this.plantService.get(this.garden_id,this.plant_id).subscribe((plant: any) => {
-          if (plant) {
-            this.plant = plant;
-            this.plant.href = this.plant_id;
-          } else {
-            console.log(`Plant with id '${this.plant_id}' not found, returning to list`);
-            this.gotoList();
-          }
-        });
-      }
-    });
+    if (sessionStorage.getItem("AuthToken")) {
+      this.sub = this.route.params.subscribe(params => {
+        this.plant_id = +params['pid'];
+        this.garden_id = +params['gid'];
+        if (this.plant_id) { //sessionStorage.getItem("AuthUsername")
+          this.plantService.get(this.garden_id, this.plant_id).subscribe((plant: any) => {
+            if (plant) {
+              this.plant = plant;
+              this.plant.href = this.plant_id;
+            } else {
+              console.log(`Plant with id '${this.plant_id}' not found, returning to list`);
+              this.gotoList();
+            }
+          });
+        }
+      });
+    } else this.router.navigate(['/login']);
   }
-  ngOnDestroy() {
+/*  ngOnDestroy() {
     this.sub.unsubscribe();
-  }
+  }*/
 
   gotoList() {
     this.router.navigate(['/plant-list/',this.garden_id]);

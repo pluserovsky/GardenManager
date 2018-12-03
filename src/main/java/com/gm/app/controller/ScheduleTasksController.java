@@ -12,10 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Configuration
@@ -29,7 +26,7 @@ public class ScheduleTasksController {
     private UserService userService;
     @Autowired
     private PlantRepository plantRepository;
-
+    Date curr = new Date();
 
     @Scheduled(fixedRate = 21600000) //6h
     public void scheduleFixedRateTask() {

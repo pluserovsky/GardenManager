@@ -12,6 +12,8 @@ export class GardenListComponent implements OnInit {
   gardens: Array<any>;
   sub: Subscription;
   i: number;
+  isLoginFailed = false;
+  errorMessage = '';
   constructor(private route: ActivatedRoute,
               private router: Router,
               private gardenService: GardenService,
@@ -26,6 +28,10 @@ export class GardenListComponent implements OnInit {
         this.gardenService.getAll(username).subscribe(data => {
           this.gardens = data;
         });
+      },error => {
+        console.log(error);
+        this.errorMessage = error.error.message;
+        this.isLoginFailed = true;
       });
     }
     else this.router.navigate(['/login']);
@@ -34,8 +40,5 @@ export class GardenListComponent implements OnInit {
     this.gardenService.remove(href,sessionStorage.getItem("AuthUsername")).subscribe(result => {
       window.location.reload();
     }, error => console.error(error));
-  }
-  gotoList() {
-    this.router.navigate(['/garden-list']);
   }
 }

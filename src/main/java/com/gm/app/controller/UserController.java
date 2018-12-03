@@ -2,10 +2,15 @@ package com.gm.app.controller;
 
 
 import com.gm.app.model.User;
+import com.gm.app.repository.UserRepository;
 import com.gm.app.service.EmailService;
 import com.gm.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +29,9 @@ public class UserController {
     private UserService userService;
     @Autowired
     private EmailService emailService;
-    String serverUrl = "http://localhost:4200/";
+    @Autowired
+    private UserRepository userRepository;
+    private String serverUrl = "http://localhost:4200/";
     @GetMapping(path="/add-user") // Map ONLY GET Requests
     public @ResponseBody String addNewUser (@RequestParam String name
             , @RequestParam String email) {
@@ -54,8 +61,7 @@ public class UserController {
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public User saveUser(@RequestBody User user){
-
-        user.setEnabled(false);
+        user.setActive(false);
         user.setConfirmationToken(UUID.randomUUID().toString());
         userService.save(user);
         SimpleMailMessage registrationEmail = new SimpleMailMessage();
@@ -71,13 +77,14 @@ public class UserController {
         emailService.sendEmail(registrationEmail);
         return user;
     }
-
+    @Transactional
     @GetMapping("/confirm-acc/{code}")
     public User processConfirmationForm(@PathVariable(value = "code") String code) {
         User user = userService.findByConfirmationToken(code);
-        user.setEnabled(true);
-       return userService.save(user);
+        userRepository.activateUser(user.getId());
+        return user;
     }
+
 
 
 }

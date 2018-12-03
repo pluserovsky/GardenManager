@@ -20,7 +20,7 @@ export class PlantListComponent implements OnInit {
   'isHydrated','isFertilized','isExaggerated','isMedicine','search','edit','delete'];
   dataSource;
   ngOnInit() {
-
+    if (sessionStorage.getItem("AuthToken")) {
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       this.garden_id = params['id'];
@@ -28,8 +28,8 @@ export class PlantListComponent implements OnInit {
         this.plants = data;
         this.dataSource = new MatTableDataSource(this.plants);
       });
-
     });
+    }else this.router.navigate(['/login']);
   }
   remove(plant_id) {
     this.plantService.remove(this.garden_id, plant_id).subscribe(result => {

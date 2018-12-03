@@ -22,7 +22,6 @@ import {AboutComponent} from './about/about.component';
 import {Interceptor} from "./app.interceptor";
 import {AuthService} from "./shared/auth/auth.service";
 import {TokenStorage} from "./shared/token/token.storage";
-import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import {CustomMaterialModule} from "./material.module";
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -33,7 +32,6 @@ import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'about', component: AboutComponent},
   {path: 'garden-list', component: GardenListComponent },
   {path: 'tasks-list', component: TasksListComponent },
   {path: 'plant-list/:id', component: PlantListComponent},
@@ -57,7 +55,6 @@ const appRoutes: Routes = [
     HomeComponent,
     ChatComponent,
     AboutComponent,
-    ErrorDialogComponent,
     LoginComponent,
     RegisterComponent,
     NavBarComponent,
@@ -83,8 +80,8 @@ const appRoutes: Routes = [
 
     CommonModule
   ],
- entryComponents: [ErrorDialogComponent],
-  providers: [ErrorDialogComponent,
+ entryComponents: [],
+  providers: [
     PlantService,
     GardenService,
     AuthService,

@@ -8,6 +8,7 @@ body {
   background: lightgreen url("assets/bg.jpg");
 
 }
+
 .spacer {
   flex-grow: 1;
 }

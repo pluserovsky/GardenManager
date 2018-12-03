@@ -1,11 +1,13 @@
 <mat-card class="medium-list">
-  <form #registerForm="ngForm" (ngSubmit)="save(registerForm.value)">
+  <form #registerForm="ngForm" (ngSubmit)="save(registerForm.value)" class="do-center">
     <mat-card-header class="do-center">
-      <mat-card-title><h2>Rejestracja</h2></mat-card-title>
+      <mat-card-title><h2>Rejestracja</h2>
+      </mat-card-title>
     </mat-card-header>
     <mat-card-content>
+      <h3>Do aktywacji konta wymagane jest potwierdzenia konta wysłane na adres e-mail podany w formularzu. </h3>
         <mat-form-field class="do-center">
-          <input  name="name" minlength="3" maxlength="50"
+          <input  name="name" minlength="6" maxlength="50"
                  matInput
                  [(ngModel)]="user.name"
                  placeholder="Imię i nazwisko" required/>
@@ -20,7 +22,7 @@
       <br>
       <mat-form-field>
         <input name="username" autocomplete="username"
-               matInput minlength="3" maxlength="50"
+               matInput minlength="6" maxlength="50"
                [(ngModel)]="user.username"
                placeholder="Login użytkownika" required />
       </mat-form-field>
@@ -41,8 +43,10 @@
         <button mat-button type="submit"
                 class="mat-raised-button mat-warn"
                 [disabled]="!registerForm.valid">Zarejestruj</button>
-
-
+      <button mat-button routerLink="/login" class="divider">Zaloguj</button>
+      <div *ngIf="registerForm.valid && isSignUpFailed">
+        <h3 class="do-center">Użytkownik z podanym adresem e-mail lub nazwą użytkownika istnieje już w systemi!</h3>
+      </div>
       </mat-card-actions>
       <mat-card-footer>
         <!--<div class="giphy">
@@ -51,6 +55,6 @@
         </div>-->
       </mat-card-footer>
   </form>
-  <button mat-button routerLink="/login" class="divider">Zaloguj</button>
+
 
 </mat-card>

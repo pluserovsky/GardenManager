@@ -74,9 +74,9 @@ public class GardenController {
         }).orElseThrow(() -> new ResourceNotFoundException("GardenId " + gardenId + " not found"));
     }
 
-    public boolean checkActivation( String username)
+    private boolean checkActivation(String username)
     {
-        return userRepository.findByUsername(username).isEnabled();
+        return userRepository.findByUsername(username).isActive();
     }
 
 }

@@ -13,6 +13,9 @@ import {Subscription} from "rxjs";
 export class RegisterComponent implements OnInit {
   user: RegisterModel = new RegisterModel();
   registerForm: NgForm;
+  isSignUpFailed = false;
+  isSignedUp = false;
+  errorMessage = '';
   hide = true;
   token: string;
   sub: Subscription;
@@ -32,7 +35,7 @@ export class RegisterComponent implements OnInit {
     });
   }
   gotoLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
   save(form: NgForm) {
     // form.setValue({username: sessionStorage.getItem("AuthUsername")});
@@ -40,6 +43,11 @@ export class RegisterComponent implements OnInit {
     //console.log(form.get);
     this.userService.save(form).subscribe(result => {
       this.gotoLogin();
-    }, error => console.error(error));
+      this.isSignedUp = true;
+      this.isSignUpFailed = false;
+    }, error => {console.error(error);
+    this.errorMessage = error.error.message;
+    this.isSignUpFailed = true;
+    });
   }
 }

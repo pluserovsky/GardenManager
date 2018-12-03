@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GardenService } from '../shared/garden/garden.service';
-//import { GiphyService } from '../shared/giphy/giphy.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -10,35 +9,36 @@ import { NgForm } from '@angular/forms';
   templateUrl: './garden-edit.component.html',
   styleUrls: ['./garden-edit.component.css']
 })
-export class GardenEditComponent implements OnInit, OnDestroy {
+export class GardenEditComponent implements OnInit {
   garden: any = {};
   sub: Subscription;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private gardenService: GardenService,
-              //private giphyService: GiphyService
   ) { }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      const id = params['id'];
-      if (id) {
-        this.gardenService.get(sessionStorage.getItem("AuthUsername"),id).subscribe((garden: any) => {
-          if (garden) {
-            this.garden = garden;
-            this.garden.href = id;
-            //this.giphyService.get(garden.name).subscribe(url => garden.giphyUrl = url);
-          } else {
-            console.log(`Garden with id '${id}' not found, returning to list`);
-            this.gotoList();
-          }
-        });
-      }
-    });
+    if (sessionStorage.getItem("AuthToken")) {
+      this.sub = this.route.params.subscribe(params => {
+        const id = params['id'];
+        if (id) {
+          this.gardenService.get(sessionStorage.getItem("AuthUsername"), id).subscribe((garden: any) => {
+            if (garden) {
+              this.garden = garden;
+              this.garden.href = id;
+            } else {
+              console.log(`Garden with id '${id}' not found, returning to list`);
+              this.gotoList();
+            }
+          });
+        }
+      });
+    } else this.router.navigate(['/login']);
   }
-  ngOnDestroy() {
+
+/*  ngOnDestroy() {
     this.sub.unsubscribe();
-  }
+  }*/
 
   gotoList() {
     this.router.navigate(['/garden-list']);

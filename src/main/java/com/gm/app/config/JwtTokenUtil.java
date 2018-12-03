@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.function.Function;
 
@@ -19,15 +20,15 @@ import static com.gm.app.model.Constants.SIGNING_KEY;
 @Component
 public class JwtTokenUtil implements Serializable {
 
-    public String getUsernameFromToken(String token) {
+    String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
-    public Date getExpirationDateFromToken(String token) {
+    private Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+    private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
@@ -48,21 +49,21 @@ public class JwtTokenUtil implements Serializable {
         return doGenerateToken(user.getUsername());
     }
 
-    private String doGenerateToken(String subject) {
+    private String doGenerateToken(String user) {
 
-        Claims claims = Jwts.claims().setSubject(subject);
-        claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("USER")));
+        Claims claims = Jwts.claims().setSubject(user);
+        claims.put("scopes", Collections.singletonList(new SimpleGrantedAuthority("USER")));
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setIssuer("http://broll.com")
+                .setIssuer("localhost")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS*1000))
                 .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
                 .compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
+    Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (
                 username.equals(userDetails.getUsername())
