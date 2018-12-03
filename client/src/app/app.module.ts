@@ -5,10 +5,10 @@ import {FormControl, FormsModule, Validators, NgControl} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import{ReactiveFormsModule} from '@angular/forms'
+import {ReactiveFormsModule} from '@angular/forms'
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {PlantService} from './shared/plant/plant.service';
 import {GardenService} from './shared/garden/garden.service';
 
@@ -23,17 +23,18 @@ import {Interceptor} from "./app.interceptor";
 import {AuthService} from "./shared/auth/auth.service";
 import {TokenStorage} from "./shared/token/token.storage";
 import {CustomMaterialModule} from "./material.module";
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
+import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {UserService} from "./shared/user/user.service";
-import { ParticlesModule } from 'angular-particle';
-import { TasksListComponent } from './tasks-list/tasks-list.component';
-import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
+import {ParticlesModule} from 'angular-particle';
+import {TasksListComponent} from './tasks-list/tasks-list.component';
+import {ConfirmRegistrationComponent} from './confirm-registration/confirm-registration.component';
+
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'garden-list', component: GardenListComponent },
-  {path: 'tasks-list', component: TasksListComponent },
+  {path: 'garden-list', component: GardenListComponent},
+  {path: 'tasks-list', component: TasksListComponent},
   {path: 'plant-list/:id', component: PlantListComponent},
   {path: 'garden-add', component: GardenEditComponent},
   {path: 'garden/:gid/plant-add', component: PlantEditComponent},
@@ -58,8 +59,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     NavBarComponent,
-   TasksListComponent,
-   ConfirmRegistrationComponent,
+    TasksListComponent,
+    ConfirmRegistrationComponent,
 
   ],
   imports: [
@@ -75,22 +76,24 @@ const appRoutes: Routes = [
     FlexLayoutModule,
     ParticlesModule
   ],
-  exports:[
+  exports: [
     RouterModule,
 
     CommonModule
   ],
- entryComponents: [],
+  entryComponents: [],
   providers: [
     PlantService,
     GardenService,
     AuthService,
     TokenStorage,
     UserService,
-    {provide: HTTP_INTERCEPTORS,
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
-      multi : true}
-],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

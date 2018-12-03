@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {UserService} from "../shared/user/user.service";
 
@@ -11,9 +11,10 @@ import {UserService} from "../shared/user/user.service";
 export class ConfirmRegistrationComponent implements OnInit {
   sub: Subscription;
   code: string;
+
   constructor(private userService: UserService,
-              private route: ActivatedRoute,
-              private router: Router) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {

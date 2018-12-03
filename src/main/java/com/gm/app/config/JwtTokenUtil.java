@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.function.Function;
@@ -52,13 +51,13 @@ public class JwtTokenUtil implements Serializable {
     private String doGenerateToken(String user) {
 
         Claims claims = Jwts.claims().setSubject(user);
-        claims.put("scopes", Collections.singletonList(new SimpleGrantedAuthority("USER")));
+        claims.put("scopes", Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuer("localhost")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS*1000))
+                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000))
                 .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
                 .compact();
     }

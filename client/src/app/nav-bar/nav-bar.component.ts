@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,14 +7,14 @@ import {Router} from "@angular/router";
 })
 export class NavBarComponent implements OnInit {
   isLoggedIn = false;
-  constructor( private router: Router) { }
+
+  constructor() {
+  }
 
   ngOnInit() {
-    if (sessionStorage.getItem("AuthToken")) {
-      this.isLoggedIn = true;
-    }
-    else this.isLoggedIn = false;
+    this.isLoggedIn = !!sessionStorage.getItem("AuthToken");
   }
+
   logout() {
     sessionStorage.clear();
     this.isLoggedIn = false;

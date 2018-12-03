@@ -25,20 +25,16 @@ public class GardenController {
         this.gardenRepository = gardenRepository;
     }
 
-/*    @GetMapping("/serve-gardens")
-    @CrossOrigin(origins = "http://localhost:4200")
-    public Page<Garden> getAllGardens(Pageable pageable) {
-        return gardenRepository.findAll(pageable);
-    }*/
     @GetMapping("/{username}/gardens")
-    public List<Garden> getAllGardensByUsername(@PathVariable (value = "username") String username, Pageable pageable) {
-        if(checkActivation(username))
-        return gardenRepository.findByUsername(username, pageable);
+    public List<Garden> getAllGardensByUsername(@PathVariable(value = "username") String username, Pageable pageable) {
+        if (checkActivation(username))
+            return gardenRepository.findByUsername(username, pageable);
         else
-        return null;
+            return null;
     }
+
     @GetMapping("/{username}/get-garden/{gardenId}")
-    public Garden getGardenById(@PathVariable (value = "username") String username,@PathVariable Long gardenId) {
+    public Garden getGardenById(@PathVariable(value = "username") String username, @PathVariable Long gardenId) {
         return gardenRepository.findById(gardenId).map(garden -> {
             garden.setUsername(username);
             garden.getName();
@@ -47,16 +43,16 @@ public class GardenController {
     }
 
     @PostMapping("/{username}/add-gardens")
-    public Garden createGarden(@Valid @RequestBody Garden garden, @PathVariable (value = "username") String username) {
-        if(checkActivation(username)){
-        garden.setUsername(username);
-        return gardenRepository.save(garden);
+    public Garden createGarden(@Valid @RequestBody Garden garden, @PathVariable(value = "username") String username) {
+        if (checkActivation(username)) {
+            garden.setUsername(username);
+            return gardenRepository.save(garden);
         } else
             return null;
     }
 
     @PutMapping("/{username}/update-garden/{gardenId}")
-    public Garden updateGarden(@PathVariable (value = "username") String username,@PathVariable Long gardenId, @Valid @RequestBody Garden gardenRequest) {
+    public Garden updateGarden(@PathVariable(value = "username") String username, @PathVariable Long gardenId, @Valid @RequestBody Garden gardenRequest) {
         return gardenRepository.findById(gardenId).map(garden -> {
             garden.setUsername(username);
             garden.setName(gardenRequest.getName());
@@ -66,7 +62,7 @@ public class GardenController {
     }
 
     @DeleteMapping("/{username}/delete-garden/{gardenId}")
-    public ResponseEntity<?> deleteGarden(@PathVariable (value = "username") String username, @PathVariable Long gardenId) {
+    public ResponseEntity<?> deleteGarden(@PathVariable(value = "username") String username, @PathVariable Long gardenId) {
         return gardenRepository.findById(gardenId).map(garden -> {
             garden.setUsername(username);
             gardenRepository.delete(garden);
@@ -74,8 +70,7 @@ public class GardenController {
         }).orElseThrow(() -> new ResourceNotFoundException("GardenId " + gardenId + " not found"));
     }
 
-    private boolean checkActivation(String username)
-    {
+    private boolean checkActivation(String username) {
         return userRepository.findByUsername(username).isActive();
     }
 

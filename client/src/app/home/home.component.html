@@ -1,35 +1,37 @@
 <mat-card class="medium-list" *ngIf="info.token; else loggedOut">
-    <mat-card-header class="do-center">
-      <mat-card-title><h2>Witaj {{info.username}}!</h2></mat-card-title>
-    </mat-card-header>
+  <mat-card-header class="do-center">
+    <mat-card-title><h2>Witaj {{info.username}}!</h2></mat-card-title>
+  </mat-card-header>
 
-  <h4 >Co u Ciebie słychać? Mamy nadzieję, że Twoje rośliny mają sie dobrze! <br /></h4>
+  <h4>Co u Ciebie słychać? Mamy nadzieję, że Twoje rośliny mają sie dobrze! <br/></h4>
   <p>
     Roślinność to nieodzowny element życia ludzi. Bez tlenu, który wytwarzają rośliny, życie na Ziemi by nie istniało.
-    W dobie bardzo dużego zużycia zasobów leśnych, m.in. wycinki lasów tropikalnych, ważne jest dbanie o możliwie jak najmniejszą degradację środowiska naturalnego.
-    Każda, nawet najmniejsza roślina ma wpływ na natlenienie powietrza i redukcję dwutlenku węgla, dzięki czemu niweluje szkodliwy wpływ przemysłu na naturę.
+    W dobie bardzo dużego zużycia zasobów leśnych, m.in. wycinki lasów tropikalnych, ważne jest dbanie o możliwie jak
+    najmniejszą degradację środowiska naturalnego.
+    Każda, nawet najmniejsza roślina ma wpływ na natlenienie powietrza i redukcję dwutlenku węgla, dzięki czemu niweluje
+    szkodliwy wpływ przemysłu na naturę.
     Czy to duży domowy ogród, czy kwiat na oknie, warto dbać o obecność roślin.
     Niestety każda roślinka wymaga mniejszej lub więcej uwagi do życia.
     Należy dbać o nawodnienie, nasłonecznienie i ochronę przed bakteriami i wirusami.
     Tylko regularna opieka gwarantuje profity z posiadania domowego ogrodu – wizualne oraz zdrowotne.
-  <h4 >Dzięki Menadżerowi Ogrodu zawsze będziesz pamiętać o swoich roślinach! <br /></h4><br />
-
-
-</mat-card >
-  <ng-template #loggedOut>
-    <mat-card class="medium-list">
-      <h4 >Co u Ciebie słychać? Mamy nadzieję, że Twoje rośliny mają sie dobrze! <br /></h4>
-      <p>
-        Roślinność to nieodzowny element życia ludzi. Bez tlenu, który wytwarzają rośliny, życie na Ziemi by nie istniało.
-        W dobie bardzo dużego zużycia zasobów leśnych, m.in. wycinki lasów tropikalnych, ważne jest dbanie o możliwie jak najmniejszą degradację środowiska naturalnego.
-        Każda, nawet najmniejsza roślina ma wpływ na natlenienie powietrza i redukcję dwutlenku węgla, dzięki czemu niweluje szkodliwy wpływ przemysłu na naturę.
-        Czy to duży domowy ogród, czy kwiat na oknie, warto dbać o obecność roślin.
-        Niestety każda roślinka wymaga mniejszej lub więcej uwagi do życia.
-        Należy dbać o nawodnienie, nasłonecznienie i ochronę przed bakteriami i wirusami.
-        Tylko regularna opieka gwarantuje profity z posiadania domowego ogrodu – wizualne oraz zdrowotne.
-      <h4 >Dzięki Menadżerowi Ogrodu zawsze będziesz pamiętać o swoich roślinach! <br /></h4><br />
-
+  <h4>Dzięki Menadżerowi Ogrodu zawsze będziesz pamiętać o swoich roślinach! <br/></h4><br/>
 
 </mat-card>
-  </ng-template>
+<ng-template #loggedOut>
+  <mat-card class="medium-list">
+    <h4>Co u Ciebie słychać? Mamy nadzieję, że Twoje rośliny mają sie dobrze! <br/></h4>
+    <p>
+      Roślinność to nieodzowny element życia ludzi. Bez tlenu, który wytwarzają rośliny, życie na Ziemi by nie istniało.
+      W dobie bardzo dużego zużycia zasobów leśnych, m.in. wycinki lasów tropikalnych, ważne jest dbanie o możliwie jak
+      najmniejszą degradację środowiska naturalnego.
+      Każda, nawet najmniejsza roślina ma wpływ na natlenienie powietrza i redukcję dwutlenku węgla, dzięki czemu
+      niweluje szkodliwy wpływ przemysłu na naturę.
+      Czy to duży domowy ogród, czy kwiat na oknie, warto dbać o obecność roślin.
+      Niestety każda roślinka wymaga mniejszej lub więcej uwagi do życia.
+      Należy dbać o nawodnienie, nasłonecznienie i ochronę przed bakteriami i wirusami.
+      Tylko regularna opieka gwarantuje profity z posiadania domowego ogrodu – wizualne oraz zdrowotne.
+    <h4>Dzięki Menadżerowi Ogrodu zawsze będziesz pamiętać o swoich roślinach! <br/></h4><br/>
+
+  </mat-card>
+</ng-template>
 

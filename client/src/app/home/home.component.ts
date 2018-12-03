@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {TokenStorage} from "../shared/token/token.storage";
+import {Component, OnInit} from '@angular/core';
 
 
 @Component({
@@ -9,21 +8,16 @@ import {TokenStorage} from "../shared/token/token.storage";
 })
 export class HomeComponent implements OnInit {
   info: any;
-  constructor(private token: TokenStorage) {
+
+  constructor() {
   }
 
   ngOnInit() {
     this.info = {
       token: sessionStorage.getItem("AuthToken"),
-      username:  sessionStorage.getItem("AuthUsername"),
+      username: sessionStorage.getItem("AuthUsername"),
       authorities: sessionStorage.getItem("AuthAuthorities"),
     };
-
   }
-  logout() {
-    sessionStorage.clear();
-    window.location.reload();
-  }
-
 
 }

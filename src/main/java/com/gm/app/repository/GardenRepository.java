@@ -11,9 +11,11 @@ import java.util.Optional;
 
 @RepositoryRestResource
 @CrossOrigin(origins = "http://localhost:4200")
-public interface GardenRepository extends JpaRepository<Garden, String>{
+public interface GardenRepository extends JpaRepository<Garden, String> {
     List<Garden> findByUsername(String username, Pageable pageable);
+
     Optional<Garden> findById(Long gardenId);
+
     boolean existsById(Long gardenId);
 
 }

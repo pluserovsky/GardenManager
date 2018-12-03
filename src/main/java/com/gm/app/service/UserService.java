@@ -10,10 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service(value = "userService")
@@ -34,7 +31,7 @@ public class UserService implements UserDetailsService {
     }
 
     private List<SimpleGrantedAuthority> getAuthority() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Collections.singletonList(new SimpleGrantedAuthority("USER"));
     }
 
     public List<User> findAll() {
@@ -57,7 +54,7 @@ public class UserService implements UserDetailsService {
 
     public User save(User user) {
         User newUser = new User();
-        if(user.getId()!=null) newUser.setId(user.getId());
+        if (user.getId() != null) newUser.setId(user.getId());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setName(user.getName());

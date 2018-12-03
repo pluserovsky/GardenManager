@@ -1,9 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PlantService } from '../shared/plant/plant.service';
-import { NgForm } from '@angular/forms';
-import {MatTableDataSource} from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+import {ActivatedRoute, Router} from '@angular/router';
+import {PlantService} from '../shared/plant/plant.service';
+import {NgForm} from '@angular/forms';
 
 export interface Delay {
   value: number;
@@ -45,14 +44,15 @@ export class PlantEditComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private plantService: PlantService,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     if (sessionStorage.getItem("AuthToken")) {
       this.sub = this.route.params.subscribe(params => {
         this.plant_id = +params['pid'];
         this.garden_id = +params['gid'];
-        if (this.plant_id) { //sessionStorage.getItem("AuthUsername")
+        if (this.plant_id) {
           this.plantService.get(this.garden_id, this.plant_id).subscribe((plant: any) => {
             if (plant) {
               this.plant = plant;
@@ -66,23 +66,19 @@ export class PlantEditComponent implements OnInit {
       });
     } else this.router.navigate(['/login']);
   }
-/*  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }*/
 
   gotoList() {
-    this.router.navigate(['/plant-list/',this.garden_id]);
+    this.router.navigate(['/plant-list/', this.garden_id]);
   }
 
   save(form: NgForm) {
-    // form.controls['plant.lastHydration'].setValue(moment(form.controls['plant.lastHydration']))
     this.plantService.save(form, this.garden_id).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }
 
   remove(href) {
-    this.plantService.remove(this.garden_id,this.plant_id).subscribe(result => {
+    this.plantService.remove(this.garden_id, this.plant_id).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }

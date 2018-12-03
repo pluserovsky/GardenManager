@@ -1,22 +1,16 @@
 package com.gm.app.controller;
 
-import com.gm.app.model.Garden;
-import com.gm.app.repository.GardenRepository;
 import com.gm.app.model.Plant;
+import com.gm.app.repository.GardenRepository;
 import com.gm.app.repository.PlantRepository;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -26,55 +20,53 @@ public class PlantController {
 
     @Autowired
     private GardenRepository gardenRepository;
+
     public PlantController(PlantRepository plantRepository) {
         this.plantRepository = plantRepository;
     }
 
     @GetMapping("/gardens/{gardenId}/plants")
-    public Collection<Plant> getAllPlantsByGardenId(@PathVariable (value = "gardenId") Long gardenId) {
+    public Collection<Plant> getAllPlantsByGardenId(@PathVariable(value = "gardenId") Long gardenId) {
         Collection<Plant> plants = plantRepository.findByGardenId(gardenId);
         Date curr = new Date();
         plants.forEach((plant) -> {
             try {
-                if (plant.getLastHydration().getTime() + plant.getHydrationCycle() - curr.getTime() <0 && plant.isHydrated()){
+                if (plant.getLastHydration().getTime() + plant.getHydrationCycle() - curr.getTime() < 0 && plant.isHydrated()) {
                     plant.setHydrated(false);
-//                    plant.setLastHydration(curr);
                     plantRepository.save(plant);
                 }
-                if (plant.getLastFertilization().getTime() + plant.getFertilizationCycle() - curr.getTime() <0 && plant.isFertilized()){
+                if (plant.getLastFertilization().getTime() + plant.getFertilizationCycle() - curr.getTime() < 0 && plant.isFertilized()) {
                     plant.setFertilized(false);
-//                    plant.setLastFertilization(curr);
                     plantRepository.save(plant);
                 }
-                if (plant.getLastExaggeration().getTime() + plant.getExaggerationCycle() - curr.getTime() <0 && plant.isExaggerated()){
+                if (plant.getLastExaggeration().getTime() + plant.getExaggerationCycle() - curr.getTime() < 0 && plant.isExaggerated()) {
                     plant.setExaggerated(false);
-//                    plant.setLastExaggeration(curr);
                     plantRepository.save(plant);
                 }
-                if (plant.getLastMedicine().getTime() + plant.getMedicineCycle() - curr.getTime() <0 && plant.isMedicine()){
+                if (plant.getLastMedicine().getTime() + plant.getMedicineCycle() - curr.getTime() < 0 && plant.isMedicine()) {
                     plant.setMedicine(false);
-//                    plant.setLastMedicine(curr);
                     plantRepository.save(plant);
                 }
-            } catch(NullPointerException e){/*System.out.println(e);*/}
+            } catch (NullPointerException e) {System.out.println(e);}
         });
         return plants;
     }
 
     @GetMapping("/gardens/{gardenId}/plant/{plantId}")
-    public Plant getPlantById(@PathVariable Long gardenId,@PathVariable Long plantId) {
-        if(!gardenRepository.existsById(gardenId)) {
+    public Plant getPlantById(@PathVariable Long gardenId, @PathVariable Long plantId) {
+        if (!gardenRepository.existsById(gardenId)) {
             throw new ResourceNotFoundException("GardenId " + gardenId + " not found?");
         }
-        return plantRepository.findById(plantId).map(plant->{
+        return plantRepository.findById(plantId).map(plant -> {
             plant.getName();
             return plantRepository.save(plant);
         }).orElseThrow(() -> new ResourceNotFoundException("PlantId " + plantId + " not found"));
     }
+
     @PostMapping("/gardens/{gardenId}/add-plant")
-    public Plant createPlant(@PathVariable (value = "gardenId") Long gardenId,
-                                 @Valid @RequestBody Plant plant) {
-        if(!gardenRepository.existsById(gardenId)) {
+    public Plant createPlant(@PathVariable(value = "gardenId") Long gardenId,
+                             @Valid @RequestBody Plant plant) {
+        if (!gardenRepository.existsById(gardenId)) {
             throw new ResourceNotFoundException("GardenId " + gardenId + " not found");
         }
         plant.setGardenId(gardenId);
@@ -86,10 +78,10 @@ public class PlantController {
     }
 
     @PutMapping("/gardens/{gardenId}/update-plant/{plantId}")
-    public Plant updatePlant(@PathVariable (value = "gardenId") Long gardenId,
-                                 @PathVariable (value = "plantId") Long plantId,
-                                 @Valid @RequestBody Plant plantRequest) {
-        if(!gardenRepository.existsById(gardenId)) {
+    public Plant updatePlant(@PathVariable(value = "gardenId") Long gardenId,
+                             @PathVariable(value = "plantId") Long plantId,
+                             @Valid @RequestBody Plant plantRequest) {
+        if (!gardenRepository.existsById(gardenId)) {
             throw new ResourceNotFoundException("GardenId " + gardenId + " not found");
         }
         return plantRepository.findById(plantId).map(plant -> {
@@ -98,29 +90,22 @@ public class PlantController {
             plant.setDescription(plantRequest.getDescription());
             plant.setNotes(plantRequest.getNotes());
             plant.setHydrationCycle(plantRequest.getHydrationCycle());
-            //plant.setLastHydration(plantRequest.getLastHydration());
-            //plant.setFertilized(plantRequest.isFertilized());
             plant.setFertilizationCycle(plantRequest.getFertilizationCycle());
-           // plant.setLastFertilization(plantRequest.getLastFertilization());
-            //plant.setExaggerated(plantRequest.isExaggerated());
             plant.setExaggerationCycle(plantRequest.getExaggerationCycle());
-           // plant.setLastExaggeration(plantRequest.getLastExaggeration());
-            //plant.setMedicine(plantRequest.isMedicine());
             plant.setMedicineCycle(plantRequest.getMedicineCycle());
-            //plant.setLastMedicine(plantRequest.getLastMedicine());
-            if(plant.isHydrated()!=plantRequest.isHydrated()){
+            if (plant.isHydrated() != plantRequest.isHydrated()) {
                 plant.setHydrated(plantRequest.isHydrated());
                 plant.setLastHydration(new Date());
             }
-            if(plant.isFertilized()!=plantRequest.isFertilized()){
+            if (plant.isFertilized() != plantRequest.isFertilized()) {
                 plant.setFertilized(plantRequest.isFertilized());
                 plant.setLastFertilization(new Date());
             }
-            if(plant.isExaggerated()!=plantRequest.isExaggerated()){
+            if (plant.isExaggerated() != plantRequest.isExaggerated()) {
                 plant.setExaggerated(plantRequest.isExaggerated());
                 plant.setLastExaggeration(new Date());
             }
-            if(plant.isMedicine()!=plantRequest.isMedicine()){
+            if (plant.isMedicine() != plantRequest.isMedicine()) {
                 plant.setMedicine(plantRequest.isMedicine());
                 plant.setLastMedicine(new Date());
             }
@@ -129,9 +114,9 @@ public class PlantController {
     }
 
     @DeleteMapping("/gardens/{gardenId}/delete-plant/{plantId}")
-    public ResponseEntity<?> deletePlant(@PathVariable (value = "gardenId") Long gardenId,
-                                         @PathVariable (value = "plantId") Long plantId) {
-        if(!gardenRepository.existsById(gardenId)) {
+    public ResponseEntity<?> deletePlant(@PathVariable(value = "gardenId") Long gardenId,
+                                         @PathVariable(value = "plantId") Long plantId) {
+        if (!gardenRepository.existsById(gardenId)) {
             throw new ResourceNotFoundException("gardenId " + gardenId + " not found");
         }
         return plantRepository.findById(plantId).map(plant -> {
@@ -139,7 +124,6 @@ public class PlantController {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("PlantId " + plantId + " not found"));
     }
-
 
 
 }

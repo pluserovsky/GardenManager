@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { ActivatedRoute, Router } from '@angular/router';
-import { GardenService } from '../shared/garden/garden.service';
-import { NgForm } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+import {ActivatedRoute, Router} from '@angular/router';
+import {GardenService} from '../shared/garden/garden.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-garden-edit',
@@ -12,10 +12,12 @@ import { NgForm } from '@angular/forms';
 export class GardenEditComponent implements OnInit {
   garden: any = {};
   sub: Subscription;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private gardenService: GardenService,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     if (sessionStorage.getItem("AuthToken")) {
@@ -36,22 +38,18 @@ export class GardenEditComponent implements OnInit {
     } else this.router.navigate(['/login']);
   }
 
-/*  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }*/
-
   gotoList() {
     this.router.navigate(['/garden-list']);
   }
 
   save(form: NgForm) {
-    this.gardenService.save(form, sessionStorage.getItem("AuthUsername") ).subscribe(result => {
+    this.gardenService.save(form, sessionStorage.getItem("AuthUsername")).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }
 
   remove(href) {
-    this.gardenService.remove(href,sessionStorage.getItem("AuthUsername")).subscribe(result => {
+    this.gardenService.remove(href, sessionStorage.getItem("AuthUsername")).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }

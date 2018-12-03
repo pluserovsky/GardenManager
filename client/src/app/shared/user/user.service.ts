@@ -1,24 +1,27 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
   public API = '//localhost:8080';
   public USER_API = this.API + '/user';
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+  }
 
   get(id: string) {
     return this.http.get(this.USER_API + '/' + id);
   }
+
   save(user: any): Observable<any> {
     let result: Observable<Object>;
-      result = this.http.post('//localhost:8080/register', user);
+    result = this.http.post('//localhost:8080/register', user);
     return result;
   }
 
   confirm(code: string) {
-    return this.http.get(this.API +'/confirm-acc/'+code);
+    return this.http.get(this.API + '/confirm-acc/' + code);
   }
 
   remove(href: string) {

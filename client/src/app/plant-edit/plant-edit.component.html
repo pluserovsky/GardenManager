@@ -4,78 +4,87 @@
       <mat-card-title><h2>{{plant.name ? 'Edytuj' : 'Dodaj'}} roślinę</h2></mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <mat-tab-group color = 'warn'>
+      <mat-tab-group color='warn'>
         <mat-tab label="O roślinie"><br>
-      <input type="hidden" name="href" [(ngModel)]="plant.href">
-      <mat-form-field>
-        <input matInput placeholder="Nazwa" [(ngModel)]="plant.name" required name="name" #name>
-      </mat-form-field>
-      <mat-form-field>
-        <textarea matInput placeholder="Opis" [(ngModel)]="plant.description" name="description" #description></textarea>
-      </mat-form-field>
-      <mat-form-field>
-        <textarea matInput placeholder="Notatki" [(ngModel)]="plant.notes" name="notes" #notes></textarea>
-      </mat-form-field>
+          <input type="hidden" name="href" [(ngModel)]="plant.href">
+          <mat-form-field>
+            <input matInput placeholder="Nazwa" [(ngModel)]="plant.name" required name="name" #name>
+          </mat-form-field>
+          <mat-form-field>
+            <textarea matInput placeholder="Opis" [(ngModel)]="plant.description" name="description"
+                      #description></textarea>
+          </mat-form-field>
+          <mat-form-field>
+            <textarea matInput placeholder="Notatki" [(ngModel)]="plant.notes" name="notes" #notes></textarea>
+          </mat-form-field>
         </mat-tab>
         <mat-tab label="Cykle"><br>
-      <mat-form-field>
-        <mat-select placeholder="Cykl podlewania" name="hydrationCycle"  [(ngModel)]="plant.hydrationCycle" required>
-          <mat-option *ngFor="let delay of delays" [value]="delay.value">
-            {{delay.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field><br>
-      <mat-form-field>
-        <mat-select placeholder="Cykl nawożenia" name="fertilizationCycle" [(ngModel)]="plant.fertilizationCycle" required>
-          <mat-option *ngFor="let delay of delays" [value]="delay.value">
-            {{delay.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field><br>
-      <mat-form-field>
-        <mat-select placeholder="Cykl przesadzania"  name="exaggerationCycle" [(ngModel)]="plant.exaggerationCycle" required>
-          <mat-option *ngFor="let delay of delays" [value]="delay.value">
-            {{delay.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field><br>
-      <mat-form-field>
-        <mat-select placeholder="Cykl podawania lekarstwa"  name="medicineCycle" [(ngModel)]="plant.medicineCycle" required>
-          <mat-option *ngFor="let delay of delays" [value]="delay.value" >
-            {{delay.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field><br>
+          <mat-form-field>
+            <mat-select placeholder="Cykl podlewania" name="hydrationCycle" [(ngModel)]="plant.hydrationCycle" required>
+              <mat-option *ngFor="let delay of delays" [value]="delay.value">
+                {{delay.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-select placeholder="Cykl nawożenia" name="fertilizationCycle" [(ngModel)]="plant.fertilizationCycle"
+                        required>
+              <mat-option *ngFor="let delay of delays" [value]="delay.value">
+                {{delay.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-select placeholder="Cykl przesadzania" name="exaggerationCycle" [(ngModel)]="plant.exaggerationCycle"
+                        required>
+              <mat-option *ngFor="let delay of delays" [value]="delay.value">
+                {{delay.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-select placeholder="Cykl podawania lekarstwa" name="medicineCycle" [(ngModel)]="plant.medicineCycle"
+                        required>
+              <mat-option *ngFor="let delay of delays" [value]="delay.value">
+                {{delay.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
         </mat-tab>
         <mat-tab label="Stan akcji">
           <br>Nawodnienie
-        <mat-slide-toggle [checked]="plant.hydrated" [(ngModel)]="plant.hydrated"  name="hydrated"></mat-slide-toggle>
+          <mat-slide-toggle [checked]="plant.hydrated" [(ngModel)]="plant.hydrated" name="hydrated"></mat-slide-toggle>
           <br>Nawożenie
-        <mat-slide-toggle [checked]="plant.fertilized" [(ngModel)]="plant.fertilized"  name="fertilized"></mat-slide-toggle>
+          <mat-slide-toggle [checked]="plant.fertilized" [(ngModel)]="plant.fertilized"
+                            name="fertilized"></mat-slide-toggle>
           <br>Przesadzanie
-        <mat-slide-toggle [checked]="plant.exaggerated" [(ngModel)]="plant.exaggerated"  name="exaggerated"></mat-slide-toggle>
+          <mat-slide-toggle [checked]="plant.exaggerated" [(ngModel)]="plant.exaggerated"
+                            name="exaggerated"></mat-slide-toggle>
           <br>Lekarstwa
-        <mat-slide-toggle [checked]="plant.medicine" [(ngModel)]="plant.medicine"  name="medicine"></mat-slide-toggle>
+          <mat-slide-toggle [checked]="plant.medicine" [(ngModel)]="plant.medicine" name="medicine"></mat-slide-toggle>
         </mat-tab>
         <mat-tab label="Ostatnie akcje">
-      <br><strong>Ostatnie podlewnie:</strong> {{plant.lastHydration  | date: 'd/M/y HH:mm'}}<br>
-      <strong>Ostatnie nawożenie:</strong> {{plant.lastFertilization  | date: 'd/M/y HH:mm'}}<br>
-      <strong>Ostatnie przesadzanie:</strong> {{plant.lastExaggeration  | date: 'd/M/y HH:mm'}}<br>
-      <strong>Ostatnie lekarstwo:</strong> {{plant.lastMedicine  | date: 'd/M/y HH:mm'}}<br>
+          <br><strong>Ostatnie podlewnie:</strong> {{plant.lastHydration | date: 'd/M/y HH:mm'}}<br>
+          <strong>Ostatnie nawożenie:</strong> {{plant.lastFertilization | date: 'd/M/y HH:mm'}}<br>
+          <strong>Ostatnie przesadzanie:</strong> {{plant.lastExaggeration | date: 'd/M/y HH:mm'}}<br>
+          <strong>Ostatnie lekarstwo:</strong> {{plant.lastMedicine | date: 'd/M/y HH:mm'}}<br>
         </mat-tab>
-        </mat-tab-group>
+      </mat-tab-group>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="warn" type="submit"
-              [disabled]="!plantForm.form.valid">Zapisz</button>
+              [disabled]="!plantForm.form.valid">Zapisz
+      </button>
       <button mat-raised-button color="warn" (click)="remove(plant.href)"
-              *ngIf="plant.href" type="button">Usuń</button>
+              *ngIf="plant.href" type="button">Usuń
+      </button>
       <a mat-button [routerLink]="['/plant-list/',this.garden_id]">Anuluj</a>
     </mat-card-actions>
     <mat-card-footer>
-      <!--<div class="giphy">
-        <img src="{{plant.giphyUrl}}" alt="{{plant.name}}">
-      </div>-->
     </mat-card-footer>
   </form>
 </mat-card>

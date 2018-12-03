@@ -10,26 +10,29 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
-@ToString @EqualsAndHashCode
+@ToString
+@EqualsAndHashCode
 @Data
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    @Size(min=3, max = 50)
-    private  String name;
+    @Size(min = 3, max = 50)
+    private String name;
     @NaturalId
     @NotBlank
     @Size(max = 50)
     @Email
     private String email;
     @NotBlank
-    @Size(min=3, max = 50)
+    @Size(min = 3, max = 50)
     private String username;
     @NotBlank
-    @Size(min=6, max = 100)
+    @Size(min = 6, max = 100)
     private String password;
     private String role;
     private boolean active;

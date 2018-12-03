@@ -6,54 +6,51 @@
     </mat-card-header>
     <mat-card-content>
       <h3>Do aktywacji konta wymagane jest potwierdzenia konta wysłane na adres e-mail podany w formularzu. </h3>
-        <mat-form-field class="do-center">
-          <input  name="name" minlength="6" maxlength="50"
-                 matInput
-                 [(ngModel)]="user.name"
-                 placeholder="Imię i nazwisko" required/>
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <input name="email" maxlength="50"
-                 matInput
-                 [(ngModel)]="user.email"
-                 placeholder="Adres e-mail" required email/>
-        </mat-form-field>
+      <mat-form-field class="do-center">
+        <input name="name" minlength="6" maxlength="50"
+               matInput
+               [(ngModel)]="user.name"
+               placeholder="Imię i nazwisko" required/>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input name="email" maxlength="50"
+               matInput
+               [(ngModel)]="user.email"
+               placeholder="Adres e-mail" required email/>
+      </mat-form-field>
       <br>
       <mat-form-field>
         <input name="username" autocomplete="username"
                matInput minlength="6" maxlength="50"
                [(ngModel)]="user.username"
-               placeholder="Login użytkownika" required />
+               placeholder="Login użytkownika" required/>
       </mat-form-field>
       <br>
-        <mat-form-field>
-          <input name="password" autocomplete="new-password"
-                 matInput minlength="6" maxlength="100"
-                 [(ngModel)]="user.password"
-                 placeholder="Hasło"
-                 [type]="hide ? 'password':'text'" required/>
-          <mat-icon matSuffix (click)="hide = !hide">
-            {{hide ? 'visibility' : 'visibility_off'}}
-          </mat-icon>
-        </mat-form-field>
+      <mat-form-field>
+        <input name="password" autocomplete="new-password"
+               matInput minlength="6" maxlength="100"
+               [(ngModel)]="user.password"
+               placeholder="Hasło"
+               [type]="hide ? 'password':'text'" required/>
+        <mat-icon matSuffix (click)="hide = !hide">
+          {{hide ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+      </mat-form-field>
       <br>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button type="submit"
-                class="mat-raised-button mat-warn"
-                [disabled]="!registerForm.valid">Zarejestruj</button>
+      <button mat-button type="submit"
+              class="mat-raised-button mat-warn"
+              [disabled]="!registerForm.valid">Zarejestruj
+      </button>
       <button mat-button routerLink="/login" class="divider">Zaloguj</button>
       <div *ngIf="registerForm.valid && isSignUpFailed">
         <h3 class="do-center">Użytkownik z podanym adresem e-mail lub nazwą użytkownika istnieje już w systemi!</h3>
       </div>
-      </mat-card-actions>
-      <mat-card-footer>
-        <!--<div class="giphy">
-          <img src="{{garden.giphyUrl}}" alt="{{garden.name}}">
-           <input type="hidden" ngDefaultControl="username" name="username" [(ngModel)]="garden.username">
-        </div>-->
-      </mat-card-footer>
+    </mat-card-actions>
+    <mat-card-footer>
+    </mat-card-footer>
   </form>
 
 

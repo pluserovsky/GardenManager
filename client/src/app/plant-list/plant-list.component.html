@@ -1,23 +1,26 @@
 <div>
   <br>
-  <div >
+  <div>
     <div class="container">
-      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row" fxLayoutAlign="space-around center"
+           class="content">
         <div class="blocks">
           <button mat-raised-button color="accent" [routerLink]="['/garden-list']">
-            <mat-icon>list</mat-icon> Lista ogrodów
+            <mat-icon>list</mat-icon>
+            Lista ogrodów
           </button>
           <button mat-raised-button color="warn" [routerLink]="['/garden/',garden_id,'plant-add']">
-            <mat-icon>add</mat-icon> Dodaj roślinę
+            <mat-icon>add</mat-icon>
+            Dodaj roślinę
           </button>
         </div>
       </div>
     </div>
 
     <br>
-    <div >
+    <div>
       <div>
-        <mat-card >
+        <mat-card>
           <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
             <h3>Rośliny w ogrodzie:</h3>
           </mat-card-title>
@@ -25,53 +28,58 @@
             <div class="example-container mat-elevation-z8">
               <mat-table #table [dataSource]="dataSource">
                 <ng-container matColumnDef="id">
-                  <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-                  <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="name">
-                  <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Nazwa</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.name}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="description">
-                  <mat-header-cell *matHeaderCellDef> Opis </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Opis</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.description}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="notes">
-                  <mat-header-cell *matHeaderCellDef> Notatki </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.notes}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Notatki</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.notes}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="createdAt">
-                  <mat-header-cell *matHeaderCellDef> Utworzony </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.createdAt  | date: 'd/M/y HH:mm'}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Utworzony</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'd/M/y HH:mm'}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="updatedAt">
-                  <mat-header-cell *matHeaderCellDef> Ostatnio modyfikowany </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.updatedAt  | date: 'd/M/y HH:mm'}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Ostatnio modyfikowany</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.updatedAt | date: 'd/M/y HH:mm'}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="isHydrated">
-                  <mat-header-cell *matHeaderCellDef> Nawodnienie </mat-header-cell>
-                  <mat-cell *matCellDef="let element" >
-                    <mat-icon>{{element.hydrated ? 'done' : 'clear'}}</mat-icon></mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Nawodnienie</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <mat-icon>{{element.hydrated ? 'done' : 'clear'}}</mat-icon>
+                  </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="isFertilized">
-                  <mat-header-cell *matHeaderCellDef> Nawożenie </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Nawożenie</mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <mat-icon>{{element.fertilized ? 'done' : 'clear'}}</mat-icon></mat-cell>
+                    <mat-icon>{{element.fertilized ? 'done' : 'clear'}}</mat-icon>
+                  </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="isExaggerated">
-                  <mat-header-cell *matHeaderCellDef> Przesadzanie </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Przesadzanie</mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <mat-icon>{{element.exaggerated ? 'done' : 'clear'}}</mat-icon></mat-cell>
+                    <mat-icon>{{element.exaggerated ? 'done' : 'clear'}}</mat-icon>
+                  </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="isMedicine">
-                  <mat-header-cell *matHeaderCellDef> Lekarstwa </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Lekarstwa</mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <mat-icon>{{element.medicine ? 'done' : 'clear'}}</mat-icon></mat-cell>
+                    <mat-icon>{{element.medicine ? 'done' : 'clear'}}</mat-icon>
+                  </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="search">
                   <mat-header-cell *matHeaderCellDef>O roślinie</mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <a target="_blank" rel="noopener noreferrer" href ="https://www.google.pl/search?q={{element.name}}" type="button">
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.google.pl/search?q={{element.name}}"
+                       type="button">
                       <mat-icon class="open">search</mat-icon>
                     </a>
                   </mat-cell>

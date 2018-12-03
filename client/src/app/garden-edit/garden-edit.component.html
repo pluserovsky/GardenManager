@@ -8,17 +8,20 @@
       <mat-form-field>
         <input matInput placeholder="Nazwa" [(ngModel)]="garden.name"
                required name="name" #name>
-      </mat-form-field><br>
+      </mat-form-field>
+      <br>
       <mat-form-field>
         <textarea matInput placeholder="Opis" [(ngModel)]="garden.description"
-                   name="description" #description></textarea><br>
+                  name="description" #description></textarea><br>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button type="submit" class="mat-raised-button mat-primary"
-              [disabled]="!gardenForm.form.valid" class="divider" (click)="save(gardenForm.value)">Zapisz</button>
+              [disabled]="!gardenForm.form.valid" class="divider" (click)="save(gardenForm.value)">Zapisz
+      </button>
       <button mat-button (click)="remove(garden.href)"
-              *ngIf="garden.href" color="warn" class="divider">Usuń</button>
+              *ngIf="garden.href" color="warn" class="divider">Usuń
+      </button>
       <button mat-button routerLink="/garden-list" color="yellow" class="divider">Anuluj</button>
     </mat-card-actions>
     <mat-card-footer>

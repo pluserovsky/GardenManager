@@ -26,7 +26,6 @@ public class ScheduleTasksController {
     private UserService userService;
     @Autowired
     private PlantRepository plantRepository;
-    Date curr = new Date();
 
     @Scheduled(fixedRate = 21600000) //6h
     public void scheduleFixedRateTask() {
@@ -34,16 +33,17 @@ public class ScheduleTasksController {
         List<String> jobGardens = new ArrayList<>();
         Set<String> owners = new HashSet<>();
         gardens.forEach(garden -> {
-            if(pendingJobs(garden)) {jobGardens.add(garden.getName());
-            owners.add(userService.findOne(garden.getUsername()).getEmail());
+            if (pendingJobs(garden)) {
+                jobGardens.add(garden.getName());
+                owners.add(userService.findOne(garden.getUsername()).getEmail());
             }
         });
-        owners.forEach(owner ->{
+        owners.forEach(owner -> {
             SimpleMailMessage toDoListEmail = new SimpleMailMessage();
             toDoListEmail.setTo(owner);
             toDoListEmail.setSubject("Przypomnienie o pracy w ogrodzie");
             toDoListEmail.setText("Cześć!\nW następujących ogrodach masz oczekujące zadania do wykonania:\n"
-                    + jobGardens.toString()+
+                    + jobGardens.toString() +
                     "\nZadbaj o rośliny i nie zapomnij zaktualizować statusu w aplikacji!");
             toDoListEmail.setFrom("lukasz@broll.pl");
 
@@ -51,14 +51,14 @@ public class ScheduleTasksController {
         });
     }
 
-    public boolean pendingJobs(Garden garden){
+    public boolean pendingJobs(Garden garden) {
         AtomicBoolean isJob = new AtomicBoolean(false);
         List<Plant> plants = plantRepository.findByGardenId(garden.getId());
         plants.forEach(plant -> {
-            if(!plant.isHydrated() && plant.getHydrationCycle()!=0) isJob.set(true);
-            else if(!plant.isMedicine() && plant.getMedicineCycle()!=0) isJob.set(true);
-            else if(!plant.isExaggerated() && plant.getExaggerationCycle()!=0) isJob.set(true);
-            else if(!plant.isFertilized() && plant.getFertilizationCycle()!=0) isJob.set(true);
+            if (!plant.isHydrated() && plant.getHydrationCycle() != 0) isJob.set(true);
+            else if (!plant.isMedicine() && plant.getMedicineCycle() != 0) isJob.set(true);
+            else if (!plant.isExaggerated() && plant.getExaggerationCycle() != 0) isJob.set(true);
+            else if (!plant.isFertilized() && plant.getFertilizationCycle() != 0) isJob.set(true);
 
         });
         return isJob.get();

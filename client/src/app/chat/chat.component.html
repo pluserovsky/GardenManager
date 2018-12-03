@@ -7,20 +7,15 @@
       <div class="message"></div>
     </div>
   </div>
-
   <div class="footer">
     <div class="send-button">
-      <mat-form-field  color="warn">
-        <input   matInput id="input"
+      <mat-form-field color="warn">
+        <input matInput id="input"
                placeholder="Wiadomość" #input autocomplete="off">
       </mat-form-field>
       <button mat-button class="chat-button"
-              (click)="sendMessage(input.value)" >Wyślij</button>
-
+              (click)="sendMessage(input.value)">Wyślij
+      </button>
     </div>
-
   </div>
-
 </div>
-
-

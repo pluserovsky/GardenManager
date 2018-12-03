@@ -2,13 +2,15 @@
   <br>
   <div class="container">
     <div class="container">
-      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row" fxLayoutAlign="space-around center"
+           class="content">
         <div *ngIf="isLoginFailed">
           <h3 class="do-center">Aktywuj konto, aby uzysakć pełby dostęp do aplikacji!</h3>
         </div>
         <div class="blocks">
           <button mat-raised-button color="warn" [routerLink]="['/garden-add']">
-            <mat-icon>add</mat-icon> Dodaj ogród
+            <mat-icon>add</mat-icon>
+            Dodaj ogród
           </button>
         </div>
       </div>
@@ -17,7 +19,7 @@
     <br>
     <div class="container">
       <div fxLayout="row" fxLayoutAlign="center center" class="content">
-        <mat-card class="card" >
+        <mat-card class="card">
           <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
             <h3>Moje ogrody:</h3>
           </mat-card-title>
@@ -25,30 +27,31 @@
             <div class="example-container mat-elevation-z8">
               <mat-table #table [dataSource]="gardens">
                 <ng-container matColumnDef="id">
-                  <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-                  <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="name">
-                  <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Nazwa</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.name}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="description">
-                  <mat-header-cell *matHeaderCellDef> Opis </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Opis</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.description}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="createdAt">
-                  <mat-header-cell *matHeaderCellDef> Utworzony </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.createdAt  | date: 'd/M/y HH:mm'}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Utworzony</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'd/M/y HH:mm'}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="updatedAt">
-                  <mat-header-cell *matHeaderCellDef> Ostatnio modyfikowany </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.updatedAt  | date: 'd/M/y HH:mm'}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> Ostatnio modyfikowany</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.updatedAt | date: 'd/M/y HH:mm'}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="open">
                   <mat-header-cell *matHeaderCellDef>Przejdź do ogrodu</mat-header-cell>
                   <mat-cell *matCellDef="let element">
                     <a [routerLink]="['/plant-list', element.id]" type="button">
-                      <mat-icon class="open">input</mat-icon></a>
+                      <mat-icon class="open">input</mat-icon>
+                    </a>
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="edit">

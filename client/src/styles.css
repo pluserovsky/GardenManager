@@ -12,6 +12,7 @@ body {
 .spacer {
   flex-grow: 1;
 }
+
 .medium-list {
   margin: auto;
   width: 800px;
@@ -39,6 +40,7 @@ body {
 .divider {
   margin-top: 10px !important;
 }
+
 .do-center {
   justify-content: center;
 }

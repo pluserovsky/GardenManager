@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
@@ -13,6 +13,5 @@ export class AuthService {
     sessionStorage.setItem("AuthUsername", username);
     return this.http.post('http://localhost:8080/generate-token', credentials);
   }
-
 
 }
