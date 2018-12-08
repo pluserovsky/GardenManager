@@ -1,4 +1,6 @@
-<mat-card class="medium-list" *ngIf="isLoggedIn; else loggedOut">
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="center center" class="content">
+    <mat-card class="medium-list" *ngIf="isLoggedIn; else loggedOut">
   <mat-card-header class="do-center">
     <mat-card-title><h2>Witaj {{info.username}}!</h2></mat-card-title>
   </mat-card-header>
@@ -55,3 +57,5 @@
     </form>
   </mat-card>
 </ng-template>
+  </div>
+</div>

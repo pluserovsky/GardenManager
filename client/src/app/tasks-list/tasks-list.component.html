@@ -1,69 +1,62 @@
-<div>
-  <div>
-    <mat-card class="medium-list">
-      <div *ngIf="isLoginFailed">
-        <h3 class="do-center">Zaloguj się ponownie, aby uzysakć pełny dostęp do aplikacji!</h3>
-      </div>
-      <mat-select placeholder="Wybierz ogród" name="name" (selectionChange)="tasks($event.value)">
-        <mat-option *ngFor="let garden of gardens" [value]="garden.id">
-          {{garden.name}}
-        </mat-option>
-      </mat-select>
-      <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-        <h3>Rośliny w ogrodzie</h3>
-      </mat-card-title>
-      <mat-card-content>
-        <div class="example-container mat-elevation-z8">
-          <mat-table #table [dataSource]="dataSource">
-            <ng-container matColumnDef="id">
-              <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
-              <mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="name">
-              <mat-header-cell *matHeaderCellDef> Nazwa</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.name}}</mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="updatedAt">
-              <mat-header-cell *matHeaderCellDef> Ostatnio modyfikowany</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.updatedAt | date: 'd/M/y HH:mm'}}</mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="isHydrated">
-              <mat-header-cell *matHeaderCellDef> Nawodnienie</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <mat-icon>{{element.hydrated ? 'done' : 'clear'}}</mat-icon>
-              </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="isFertilized">
-              <mat-header-cell *matHeaderCellDef> Nawożenie</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <mat-icon>{{element.fertilized ? 'done' : 'clear'}}</mat-icon>
-              </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="isExaggerated">
-              <mat-header-cell *matHeaderCellDef> Przesadzanie</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <mat-icon>{{element.exaggerated ? 'done' : 'clear'}}</mat-icon>
-              </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="isMedicine">
-              <mat-header-cell *matHeaderCellDef> Lekarstwa</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <mat-icon>{{element.medicine ? 'done' : 'clear'}}</mat-icon>
-              </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="open">
-              <mat-header-cell *matHeaderCellDef>Otwórz</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <a [routerLink]="['/garden/',garden_id,'plant-edit', element.id]" type="button">
-                  <mat-icon class="open">input</mat-icon>
-                </a>
-              </mat-cell>
-            </ng-container>
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-          </mat-table>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
+        <mat-card class="medium-list">
+          <div *ngIf="isLoginFailed">
+            <h3 class="do-center">Aktywuj konto, aby uzysakć pełny dostęp do aplikacji!</h3>
+          </div>
+          <mat-select placeholder="Wybierz ogród"  name="name" (selectionChange)="tasks($event.value)">
+            <mat-option *ngFor="let garden of gardens" [value]="garden.id">
+              {{garden.name}}
+            </mat-option>
+          </mat-select>
+
+          <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3>Rośliny w ogrodzie</h3>
+          </mat-card-title>
+          <mat-card-content>
+            <div class="example-container mat-elevation-z8">
+              <mat-table #table [dataSource]="dataSource" >
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="updatedAt">
+                  <mat-header-cell *matHeaderCellDef> Ostatnio modyfikowany </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.updatedAt  | date: 'd/M/y HH:mm'}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="isHydrated">
+                  <mat-header-cell *matHeaderCellDef> Nawodnienie </mat-header-cell>
+                  <mat-cell *matCellDef="let element" >
+                    <mat-icon>{{element.hydrated ? 'done' : 'clear'}}</mat-icon></mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="isFertilized">
+                  <mat-header-cell *matHeaderCellDef> Nawożenie </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <mat-icon>{{element.fertilized ? 'done' : 'clear'}}</mat-icon></mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="isExaggerated">
+                  <mat-header-cell *matHeaderCellDef> Przesadzanie </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <mat-icon>{{element.exaggerated ? 'done' : 'clear'}}</mat-icon></mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="isMedicine">
+                  <mat-header-cell *matHeaderCellDef> Lekarstwa </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <mat-icon>{{element.medicine ? 'done' : 'clear'}}</mat-icon></mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="open">
+                  <mat-header-cell *matHeaderCellDef>Otwórz</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <a [routerLink]="['/garden/',garden_id,'plant-edit', element.id]" type="button">
+                      <mat-icon class="open">input</mat-icon>
+                    </a>
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+          </mat-card-content>
+        </mat-card>

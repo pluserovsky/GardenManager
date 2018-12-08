@@ -1,4 +1,6 @@
-<mat-card class="medium-list" *ngIf="info.token; else loggedOut">
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="center center" class="content">
+    <mat-card class="medium-list" *ngIf="info.token; else loggedOut">
   <mat-card-header class="do-center">
     <mat-card-title><h2>Witaj {{info.username}}!</h2></mat-card-title>
   </mat-card-header>
@@ -34,4 +36,5 @@
 
   </mat-card>
 </ng-template>
-
+  </div>
+</div>
